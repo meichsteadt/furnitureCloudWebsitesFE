@@ -1,0 +1,32 @@
+<div class="row">
+  <form class="col s12 m12 options">
+    <div class="row">
+      <div class="input-field col s12 m4">
+        <select id="sortBy" (change)="sendSort($event)">
+          <option value="az">A-Z</option>
+          <option value="price" selected>Price</option>
+        </select>
+        <label>Sort By</label>
+      </div>
+      <div class="input-field col m4 s6">
+        <input (change)="sendPrices($event, 'min')" value="{{minPrice}}" placeholder=" " id="min-price" type="text">
+        <label class="active" for="first_name">Min price</label>
+      </div>
+      <div class="input-field col m4 s6">
+        <input (change)="sendPrices($event, 'max')" value="{{maxPrice}}" placeholder=" " id="max-price" type="text">
+        <label class="active" for="last_name">Max price</label>
+      </div>
+    </div>
+  </form>
+  <div class="col s12 m6 l4 box" *ngFor="let product of products">
+    <a routerLink="/products/{{product.id}}">
+      <div class="img-wrapper">
+        <img src="{{product.thumbnail}}" alt="{{product.name}}" class="responsive-img">
+      </div>
+      <div class="info">
+        <h6 class="truncate">{{product.name}} {{product.setName}}</h6>
+        <h5>{{product.price | currency: 'USD': 'symbol': '1.0-0'}}</h5>
+      </div>
+    </a>
+  </div>
+</div>

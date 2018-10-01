@@ -1,0 +1,12 @@
+footer {
+  border-top: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5px;
+  max-height: 50px;
+
+  .footer-copyright {
+    padding: 0;
+  }
+}

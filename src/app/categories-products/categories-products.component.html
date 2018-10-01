@@ -1,0 +1,7 @@
+<app-breadcrumbs></app-breadcrumbs>
+<app-product-list
+  [products]="products"
+  [pages]="pages"
+  (emitSort)="receiveSort($event)"
+  (emitPriceFilter)="receivePriceFilter($event)"
+></app-product-list>

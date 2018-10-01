@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="col s12 m12 l10">
+    <div id="contact" class="section scrollspy row">
+      <h2 class="center-align">Contact</h2>
+      <hr>
+      <div class="col m12 s12" [ngClass]="numCols()" *ngFor="let store of stores">
+        <table>
+          <tbody>
+            <tr>
+              <td>Phone:</td>
+              <td>{{store.phone}}</td>
+            </tr>
+            <tr>
+              <td>Address:</td>
+              <td>{{store.fullAddress()}}</td>
+            </tr>
+            <tr>
+              <td>Hours:</td>
+              <td>
+                <span *ngFor="let hour of store.splitHours()">{{hour}} <br></span>
+              </td>
+            </tr>
+            <tr>
+              <td>Email:</td>
+              <td>{{store.email}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3145.352337236261!2d-121.27389458525514!3d37.968905979724546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80900d57273ecb7f%3A0xcd188ff2aaaa9b95!2sHome+Styles+Furniture!5e0!3m2!1sen!2sus!4v1526933828443" width="90%" height="450" margin="20px auto" frameborder="0" style="border:0" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div id="look_inside" class="section scrollspy">
+      <h2>Look Inside</h2>
+      <hr>
+      <div *ngIf="ready()" class="carousel carousel-slider">
+        <a class="carousel-item" *ngFor="let image of images"><img src="{{image}}"></a>
+      </div>
+    </div>
+    <div id="social" class="section scrollspy">
+      <h2>Social</h2>
+      <hr>
+      <app-reviews [reviews]="reviews"></app-reviews>
+    </div>
+    <div id="financing" class="section scrollspy">
+      <h2 class="center-align">Financing</h2>
+      <hr>
+      <app-financing></app-financing>
+    </div>
+    <div id="deliveries" class="section scrollspy">
+      <h2 class="center-align">Deliveries</h2>
+      <hr>
+      <table class="striped">
+        <thead>
+          <tr>
+            <th>Cities</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let delivery of deliveries">
+            <td>{{delivery.name}}</td>
+            <td>{{delivery.price | currency: 'USD': 'symbol': '1.0-0'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="col hide-on-med-and-down l2">
+    <ul class="section table-of-contents">
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#look_inside">Look Inside</a></li>
+      <li><a href="#social">Social</a></li>
+      <li><a href="#financing">Financing</a></li>
+      <li><a href="#deliveries">Deliveries</a></li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+.carousel {
+  margin-bottom: 0;
+  height: 450px !important;
+  overflow: scroll;
+
+  .carousel-item {
+    height: 80%;
+    min-height: 80%;
+    overflow: scroll;
+  }
+  @media screen and (min-width: 600px ) {
+    & {
+      max-height: 400px;
+    }
+  }
+}
+
+.half {
+  position: relative;
+  left: -4px;
+}
+
+blockquote {
+  border-color: #ddd;
+}

@@ -1,0 +1,14 @@
+form {
+  label.active i {
+    color: #ddd;
+  }
+
+  .input-field input[type=search]:focus:not(.browser-default) i, .input-field input[type=search]:focus:not(.browser-default) + label i {
+    color: #444 !important;
+  }
+}
+
+.nav-wrapper .input-field input[type=search] {
+  height: 80%;
+  border-bottom: 1px solid #ddd;
+}

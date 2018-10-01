@@ -1,0 +1,10 @@
+<div id="review-carousel" class="carousel carousel-slider row" style="height: 200px">
+  <div *ngFor="let review of reviews" class="col s12 carousel-item">
+    <h2>{{review.name}}</h2>
+    <span class="stars">
+      <i *ngFor="let star of review.starArray()" class="material-icons">star</i>
+      <i *ngIf="review.half()" class="half material-icons">star_half</i>
+    </span>
+    <blockquote class="flow-text"><p>{{review.review}}</p></blockquote>
+  </div>
+</div>

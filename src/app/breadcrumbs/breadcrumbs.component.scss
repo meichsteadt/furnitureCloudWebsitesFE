@@ -1,0 +1,25 @@
+.breadcrumbs {
+  margin: 20px 0;
+  display: flex;
+}
+
+.breadcrumb {
+  color: #444;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+
+  &.active {
+    opacity: 1;
+  }
+  &:before {
+    opacity: 0.7;
+    color: #444;
+  }
+
+  @media screen and (max-width: 408px) {
+    & {
+      font-size: 16px;
+    }
+  }
+}

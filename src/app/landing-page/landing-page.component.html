@@ -1,0 +1,28 @@
+<app-promotions></app-promotions>
+<div class="row">
+  <div class="welcome center-align">
+    <h5>Welcome to</h5>
+    <h2>{{store?.name}}</h2>
+    <hr>
+  </div>
+  <div class="col s12 m6 l3 category-link" *ngFor="let category of categories">
+    <a routerLink="/categories/{{category.linkName()}}">
+      <div class="img-wrapper">
+        <img src="{{category.image}}">
+      </div>
+      <div class="info">
+        <h6>{{category.name}}</h6>
+      </div>
+    </a>
+  </div>
+  <div class="col s12 m6 l3 category-link">
+    <a routerLink="/promotions">
+      <div class="img-wrapper">
+        <img src="/assets/summer_sale.png" alt="">
+      </div>
+      <div class="info">
+        <h6>Promotions</h6>
+      </div>
+    </a>
+  </div>
+</div>

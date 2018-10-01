@@ -1,0 +1,45 @@
+.sidenav-trigger {
+  color: #444;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.sidenav {
+  h4 {
+    color: #444;
+    padding: 0 32px;
+    white-space: nowrap;
+  }
+
+  label.active i {
+    color: #ddd;
+  }
+
+  .input-field input[type=search]:focus:not(.browser-default) i, .input-field input[type=search]:focus:not(.browser-default) + label i {
+    color: #444 !important;
+  }
+
+  i {
+    display: inline;
+  }
+
+  .back {
+    height: 50px;
+    margin: 0 20px;
+    i {
+      float: right;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+li {
+  .sidenav-trigger {
+    float: none;
+    margin: auto;
+  }
+}

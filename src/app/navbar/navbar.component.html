@@ -1,0 +1,33 @@
+<nav class="white">
+  <div class="nav-wrapper">
+    <app-sidenav [categories]="categories" [store]="store"></app-sidenav>
+    <a routerLink="/" class="brand-logo"><h1>{{store?.name}}</h1></a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down valign-wrapper">
+      <li><a id="categories-trigger" class="dropdown-trigger" data-target="categories">Furniture<i class="material-icons right">keyboard_arrow_down</i></a></li>
+      <li><a id="promotions-trigger" class="dropdown-trigger" data-target="promotions">Promotions<i class="material-icons right">keyboard_arrow_down</i></a></li>
+      <li><a routerLink="/about-us">About Us</a></li>
+    </ul>
+    <app-nav-search [ngStyle]="{'flex-grow': 2, 'margin-right': '25px'}"></app-nav-search>
+  </div>
+</nav>
+
+<ul id="categories" class="dropdown-content row">
+  <li class="col s3" *ngFor="let category of categories">
+    <a routerLink="/categories/{{category.linkName()}}" class="category">
+      <span class="img-wrapper">
+        <img src="{{category.image}}">
+      </span>
+      <p class="center-align">{{category.name}}</p>
+    </a>
+  </li>
+</ul>
+<ul id="promotions" class="dropdown-content row">
+  <li class="col s3" *ngFor="let promotion of promotions">
+    <a routerLink="/promotions/{{promotion.linkName()}}" class="promotion">
+      <span class="img-wrapper">
+        <img src="{{promotion.image}}" class="responsive-img">
+      </span>
+      <p class="center-align">{{promotion.name}}</p>
+    </a>
+  </li>
+</ul>

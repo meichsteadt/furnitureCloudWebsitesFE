@@ -1,0 +1,18 @@
+<table class="centered">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Credit Needed</th>
+      <th>Length</th>
+      <th>Bank Account Needed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let financing of financings">
+      <td>{{financing.name}}</td>
+      <td><i class="material-icons {{financing.icon(financing.creditNeeded)}}">{{financing.icon(financing.creditNeeded)}}</i></td>
+      <td>{{financing.length}}</td>
+      <td><i class="material-icons {{financing.icon(financing.bankAccount)}}">{{financing.icon(financing.bankAccount)}}</i></td>
+    </tr>
+  </tbody>
+</table>

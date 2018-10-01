@@ -1,0 +1,37 @@
+.collapsible-header i {
+  font-size: inherit;
+}
+
+.collapsible {
+  box-shadow: none;
+  border: none;
+
+  li {
+    .collapsible-header {
+      i {
+        transition: transform .2s ease;
+        margin-left: 10px;
+      }
+    }
+    .collapsible-body {
+      border-bottom: none;
+    }
+  }
+
+  li.active {
+    .collapsible-header {
+      i {
+        transform: rotateZ(90deg);
+      }
+    }
+  }
+}
+
+th {
+  font-weight: 500;
+}
+
+.comfort-image {
+  background-color: #ccc;
+  width: 100%;
+}
