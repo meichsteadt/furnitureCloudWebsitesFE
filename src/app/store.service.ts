@@ -2,7 +2,9 @@ import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 
-import { secrets } from './secrets';
+import { AuthService } from './auth.service';
+
+
 import { url } from './secrets';
 import { storeId } from './secrets';
 import { Category } from './category.model';
@@ -14,9 +16,9 @@ declare var $: any;
 @Injectable()
 export class StoreService {
   url: string;
-  headers = new HttpHeaders({"UserKey": secrets.key, "UserSecret": secrets.secret})
+  headers = new HttpHeaders({"Authorization": this.authService.getUser()})
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient, private authService: AuthService){
     this.url = this.getUrl() + "/stores";
   }
 

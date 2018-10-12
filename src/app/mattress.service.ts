@@ -2,7 +2,8 @@ import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 
-import { secrets } from './secrets';
+import { AuthService } from './auth.service';
+
 import { url } from './secrets';
 import { Mattress } from './mattress.model';
 import { Size } from './size.model';
@@ -10,9 +11,9 @@ import { Size } from './size.model';
 @Injectable()
 export class MattressService {
   url: string;
-  headers = new HttpHeaders({"UserKey": secrets.key, "UserSecret": secrets.secret})
+  headers = new HttpHeaders({"Authorization": this.authService.getUser()})
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient, private authService: AuthService){
     this.url = this.getUrl() + "/mattresses";
   }
 

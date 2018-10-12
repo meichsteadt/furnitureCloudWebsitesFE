@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { CategoryService } from '../category.service';
 import { Category } from '../category.model';
 import { Store } from '../store.model';
 import { StoreService } from '../store.service';
+import { EditService } from '../edit.service';
+
+declare var $: any;
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.scss'],
-  providers: [CategoryService, StoreService]
+  providers: [CategoryService, StoreService, EditService]
 })
 export class LandingPageComponent implements OnInit {
   categories: Category[];
   store: Store;
-  constructor(private categoryService: CategoryService, private storeService: StoreService) { }
+  constructor(private categoryService: CategoryService, private storeService: StoreService, public editService: EditService) { }
 
   ngOnInit() {
     this.categories = this.categoryService.parentCategories();
@@ -31,6 +34,12 @@ export class LandingPageComponent implements OnInit {
         response["google_maps"]
       )
     })
+  }
+
+  edit(category) {
+    $("#main").addClass("edit");
+    $("#slideout").addClass("edit");
+    this.editService.setModel(category);
   }
 
 }

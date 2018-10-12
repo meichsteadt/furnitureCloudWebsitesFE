@@ -1,0 +1,6 @@
+<div class="body">
+  <i (click)="closeEdit()" class="material-icons">clear</i>
+  <button (click)="receiveModel()">receive</button>
+  <p>{{model}}</p>
+  <p *ngFor="let model of models">{{model}}</p>
+</div>

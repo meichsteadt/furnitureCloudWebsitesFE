@@ -1,5 +1,5 @@
 export class Category {
-  constructor(public name: String, public image: String) {}
+  constructor(public id: number, public name: String, public image: String) {}
 
   linkName() {
     var newName = "";

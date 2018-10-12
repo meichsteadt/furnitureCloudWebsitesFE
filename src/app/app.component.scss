@@ -2,3 +2,33 @@
   max-width: none;
   width: 90%;
 }
+
+#main {
+  transition: width .3s ease;
+  transition: margin-left .3s ease;
+
+  &.edit {
+    width: 75%;
+    float: left;
+    margin-left: 25%;
+  }
+}
+
+#slideout {
+  width: 0%;
+  opacity: 0;
+  transition: width .3s ease;
+  float: left;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding-left: 25px;
+  background-color: #fff;
+  border-right: 1px solid #333;
+
+  &.edit {
+    opacity: 1;
+    width: 25% !important;
+  }
+}

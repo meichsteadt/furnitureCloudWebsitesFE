@@ -8,6 +8,9 @@ import { routing } from './app.routing';
 
 import { AuthGuardService } from './auth-guard.service';
 import { AuthService } from './auth.service';
+import { EditService } from './edit.service';
+
+import { LoginComponent } from './login/login.component';
 
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './product-list/product-list.component';
@@ -28,6 +31,7 @@ import { FinancingComponent } from './financing/financing.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { MattressesComponent } from './mattresses/mattresses.component';
 import { PromotionsProductsComponent } from './promotions-products/promotions-products.component';
+import { EditSlideoutComponent } from './edit-slideout/edit-slideout.component';
 
 
 @NgModule({
@@ -50,7 +54,9 @@ import { PromotionsProductsComponent } from './promotions-products/promotions-pr
     FinancingComponent,
     ReviewsComponent,
     MattressesComponent,
-    PromotionsProductsComponent
+    PromotionsProductsComponent,
+    LoginComponent,
+    EditSlideoutComponent
   ],
   imports: [
     routing,
@@ -59,7 +65,7 @@ import { PromotionsProductsComponent } from './promotions-products/promotions-pr
     HttpClientModule,
     HttpModule
   ],
-  providers: [AuthGuardService, AuthService],
+  providers: [AuthGuardService, AuthService, EditService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

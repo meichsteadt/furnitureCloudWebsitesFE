@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuardService } from './auth-guard.service';
 
+import { LoginComponent } from './login/login.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
@@ -18,43 +19,57 @@ import { FinancingComponent } from './financing/financing.component';
 const appRoutes: Routes = [
   {
     path: '',
-    component: LandingPageComponent
+    component: LandingPageComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'promotions/:id',
-    component: PromotionsProductsComponent
+    component: PromotionsProductsComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'categories',
-    component: CategoriesComponent
+    component: CategoriesComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'categories/mattresses',
-    component: MattressesComponent
+    component: MattressesComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'categories/:parentCategory',
-    component: SubCategoriesComponent
+    component: SubCategoriesComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'categories/:parentCategory/:categoryName',
-    component: CategoriesProductsComponent
+    component: CategoriesProductsComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'products/:id',
-    component: ProductDetailsComponent
+    component: ProductDetailsComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'mattresses/:id',
-    component: MattressDetailsComponent
+    component: MattressDetailsComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'about-us',
-    component: StoreDetailsComponent
+    component: StoreDetailsComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'financing',
-    component: FinancingComponent
+    component: FinancingComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ]
 

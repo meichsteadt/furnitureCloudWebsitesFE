@@ -96,3 +96,7 @@ main {
 .carousel .indicators .indicator-item {
   background-color: rgba(64,64,64,0.5);
 }
+
+#navbar {
+  z-index: 99;
+}

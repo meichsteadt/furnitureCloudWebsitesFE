@@ -33,7 +33,7 @@
     }
   }
 
-  &:hover .img-wrapper img {
+  & a:hover .img-wrapper img {
     transform: scale(1.1);
   }
 }
@@ -47,5 +47,27 @@
 
   h5 {
     margin-bottom: 10px;
+  }
+}
+
+.edit {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-bottom-left-radius: 10%;
+  padding: 5px 10px;
+
+  i {
+    color: #333;
+    transition: color .3s ease;
+  }
+
+  &:hover {
+    cursor: pointer;
+    i {
+      color: inherit;
+    }
   }
 }

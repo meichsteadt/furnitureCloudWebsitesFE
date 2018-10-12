@@ -2,7 +2,8 @@ import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 
-import { secrets } from './secrets';
+import { AuthService } from './auth.service';
+
 import { url } from './secrets';
 import { Category } from './category.model';
 import { Product } from './product.model';
@@ -12,9 +13,9 @@ declare var $: any;
 @Injectable()
 export class CategoryService {
   url: string;
-  headers = new HttpHeaders({"UserKey": secrets.key, "UserSecret": secrets.secret})
+  headers = new HttpHeaders({"Authorization": this.authService.getUser()})
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient, private authService: AuthService){
     this.url = this.getUrl() + "/categories";
   }
 
@@ -23,15 +24,20 @@ export class CategoryService {
   }
 
   parentCategories(): Category[] {
-    return [
-      new Category("Dining", "https://s3-us-west-1.amazonaws.com/homelegance-resized/Images_MidRes_For+Customer+Advertisement/5179-90.jpg"),
-      new Category("Bedroom", "https://s3-us-west-1.amazonaws.com/homelegance-resized/Images_MidRes_For+Customer+Advertisement/2159-1.jpg"),
-      new Category("Seating", "https://s3-us-west-1.amazonaws.com/homelegance-resized/Images_MidRes_For+Customer+Advertisement/8327BE.jpg"),
-      new Category("Occasional", "https://s3-us-west-1.amazonaws.com/homelegance-resized/Images_MidRes_For+Customer+Advertisement/3600-31.jpg"),
-      new Category("Youth", "https://s3-us-west-1.amazonaws.com/homelegance-resized/Images_MidRes_For+Customer+Advertisement/B2008TF.jpg"),
-      new Category("Home", "https://s3-us-west-1.amazonaws.com/homelegance-resized/Images_MidRes_For+Customer+Advertisement/5415RF-15DKT%205415RF-16RDT%205415RF-17MT%205415RF-18.jpg"),
-      new Category("Mattresses", "http://www.thedump.com/content/images/thumbs/0003184_meditations-enlightenment-queen-mattress_775.jpeg")
-    ]
+    var parentCategories: Category[] = []
+    this.http.get(this.getUrl() + "/parent_categories", {headers: this.headers}).subscribe((response: Array<any>) => {
+      for(var i = 0; i < response.length; i++) {
+        var parentCategory = response[i];
+        parentCategories.push(
+          new Category(
+            parentCategory["id"],
+            parentCategory["name"],
+            parentCategory["image"]
+          )
+        )
+      }
+    })
+    return parentCategories;
   }
   //
   // getCategories(): Observable<any> {
@@ -45,6 +51,7 @@ export class CategoryService {
         var category = response[i];
         categories.push(
           new Category(
+            category["id"],
             category["name"],
             category["image"]
           )
