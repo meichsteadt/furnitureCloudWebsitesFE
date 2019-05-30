@@ -26,3 +26,30 @@
     }
   }
 }
+
+.price {
+  display: inline-block;
+  padding-right: 5px;
+
+  &.promo {
+    color: #c91f24;
+  }
+}
+
+.promo-price {
+  color: #999;
+  text-decoration: line-through;
+  font-style: italic;
+  display: inline-block;
+  padding-right: 5px;
+}
+
+.discount {
+  color: #c91f24;
+  display: inline-block;
+}
+
+.on-sale {
+  color: #c91f24;
+  margin-top: 0;
+}

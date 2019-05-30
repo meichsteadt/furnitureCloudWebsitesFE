@@ -12,11 +12,12 @@ import { ActivatedRoute } from '@angular/router';
 export class PromotionsProductsComponent implements OnInit {
   id: string;
   sortBy: string = "price";
-  products: Product[];
+  products: Product[] = [];
   pages: number;
+  pageNumber: number = 1;
   minPrice: number = 0;
   maxPrice: number = 3000;
-  pageNumber: number = 1;
+  loaded = false;
   constructor(private route: ActivatedRoute, private promotionService: PromotionService) { }
 
   ngOnInit() {
@@ -27,7 +28,18 @@ export class PromotionsProductsComponent implements OnInit {
   }
 
   getProducts() {
-    this.products = this.promotionService.getPromotionProducts(this.id, this.pageNumber, this.sortBy, this.minPrice, this.maxPrice);
+    this.products = [];
+    this.promotionService.getPromotionProducts(this.id, this.pageNumber, this.sortBy, this.minPrice, this.maxPrice).subscribe(response => {
+      for(var i = 0; i < response["arr"].length; i++) {
+        var product = response["arr"][i]["product"];
+        var price = response["arr"][i]["set_price"];
+        var onPromo = response["arr"][i]["on_promo"];
+        this.pages = response["pages"];
+        this.products.push(
+          new Product(product["id"], product["name"], product["image"], product["description"], product["thumbnail"], price, product["set_name"], product["promo_price"], product["promo_discount"], onPromo)
+        );
+      }
+    }, err =>{}, () => this.loaded = true);
   }
 
   receiveSort(sortBy) {
@@ -35,7 +47,8 @@ export class PromotionsProductsComponent implements OnInit {
     this.getProducts();
   }
 
-  nextPage(page) {
+  receivePage(page) {
+    this.pageNumber = page;
     this.getProducts();
   }
 

@@ -14,11 +14,13 @@ import { Product } from '../product.model';
 export class CategoriesProductsComponent implements OnInit {
   parentCategory: string;
   categoryName: string;
-  products: Product[];
+  products: Product[] = [];
   pages: number;
+  pageNumber: number = 1;
   sortBy: string = "price";
   minPrice: number = 0;
   maxPrice: number = 3000;
+  loaded = false;
   constructor(private route: ActivatedRoute, private categoryService: CategoryService) { }
 
   ngOnInit() {
@@ -31,9 +33,18 @@ export class CategoriesProductsComponent implements OnInit {
   }
 
   getProducts() {
-    var tempProducts = this.categoryService.getCategoryProducts(this.categoryName, this.parentCategory, this.sortBy, this.minPrice, this.maxPrice);
-    this.products = tempProducts["products"];
-    this.pages = tempProducts["pages"];
+    this.products = [];
+    this.categoryService.getCategoryProducts(this.categoryName, this.parentCategory, this.sortBy, this.minPrice, this.maxPrice).subscribe((response: Array<any>) => {
+      this.pages = response["pages"];
+      for(var i = 0; i < response["arr"].length; i++) {
+        var product = response["arr"][i]["product"];
+        var price = response["arr"][i]["set_price"];
+        var onPromo = response["arr"][i]["on_promo"];
+        this.products.push(
+          new Product(product["id"], product["name"], product["image"], product["description"], product["thumbnail"], price, product["set_name"], product["promo_price"], product["promo_discount"], onPromo)
+        );
+      }
+    }, err =>{}, () => this.loaded = true);
   }
 
   receiveSort(sortBy) {
@@ -44,6 +55,11 @@ export class CategoriesProductsComponent implements OnInit {
   receivePriceFilter(event) {
     this.minPrice = event["min"];
     this.maxPrice = event["max"];
+    this.getProducts();
+  }
+
+  receivePage(page) {
+    this.pageNumber = page;
     this.getProducts();
   }
 }

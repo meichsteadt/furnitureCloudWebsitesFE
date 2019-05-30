@@ -26,17 +26,19 @@
             </tr>
           </tbody>
         </table>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3145.352337236261!2d-121.27389458525514!3d37.968905979724546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80900d57273ecb7f%3A0xcd188ff2aaaa9b95!2sHome+Styles+Furniture!5e0!3m2!1sen!2sus!4v1526933828443" width="90%" height="450" margin="20px auto" frameborder="0" style="border:0" allowfullscreen></iframe>
+      </div>
+      <div class="col s12">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12776.556342946536!2d-119.7919216!3d36.8151869!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x3ebee9e8532f014a!2sRoyal+Furniture!5e0!3m2!1sen!2sus!4v1558728724105!5m2!1sen!2sus" width="90%" height="450" margin="50px auto" frameborder="0" style="border:0" allowfullscreen></iframe>
       </div>
     </div>
-    <div id="look_inside" class="section scrollspy">
+    <div *ngIf="images.length > 0" id="look_inside" class="section scrollspy">
       <h2>Look Inside</h2>
       <hr>
       <div *ngIf="ready()" class="carousel carousel-slider">
         <a class="carousel-item" *ngFor="let image of images"><img src="{{image}}"></a>
       </div>
     </div>
-    <div id="social" class="section scrollspy">
+    <div id="social" class="section scrollspy" *ngIf="reviews.length > 0">
       <h2>Social</h2>
       <hr>
       <app-reviews [reviews]="reviews"></app-reviews>
@@ -46,7 +48,7 @@
       <hr>
       <app-financing></app-financing>
     </div>
-    <div id="deliveries" class="section scrollspy">
+    <div *ngIf="deliveries.length > 0" id="deliveries" class="section scrollspy">
       <h2 class="center-align">Deliveries</h2>
       <hr>
       <table class="striped">
@@ -69,10 +71,10 @@
   <div class="col hide-on-med-and-down l2">
     <ul class="section table-of-contents">
       <li><a href="#contact">Contact</a></li>
-      <li><a href="#look_inside">Look Inside</a></li>
-      <li><a href="#social">Social</a></li>
+      <li *ngIf="images.length > 0"><a href="#look_inside">Look Inside</a></li>
+      <li *ngIf="reviews.length > 0"><a href="#social">Social</a></li>
       <li><a href="#financing">Financing</a></li>
-      <li><a href="#deliveries">Deliveries</a></li>
+      <li *ngIf="deliveries.length > 0"><a href="#deliveries">Deliveries</a></li>
     </ul>
   </div>
 </div>

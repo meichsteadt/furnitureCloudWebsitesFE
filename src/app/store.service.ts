@@ -10,15 +10,20 @@ import { storeId } from './secrets';
 import { Category } from './category.model';
 import { Store } from './store.model';
 import { Review } from './review.model';
+import { UserService} from './user.service';
 
 declare var $: any;
 
 @Injectable()
 export class StoreService {
   url: string;
-  headers = new HttpHeaders({"Authorization": this.authService.getUser()})
+  stores: Store[] = [];
+  authenticated: Boolean = false;
+  headers = new HttpHeaders({
+  "SiteAuth": this.userService.user.token
+})
 
-  constructor(private http: HttpClient, private authService: AuthService){
+  constructor(private http: HttpClient, private authService: AuthService, private userService: UserService){
     this.url = this.getUrl() + "/stores";
   }
 

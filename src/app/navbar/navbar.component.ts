@@ -5,6 +5,7 @@ import { PromotionService } from '../promotion.service';
 import { Promotion } from '../promotion.model';
 import { Store } from '../store.model';
 import { StoreService } from '../store.service';
+import { showPromotions } from '../secrets';
 
 declare var $: any;
 
@@ -47,4 +48,7 @@ export class NavbarComponent implements OnInit {
 
   }
 
+  showPromotions() {
+    return this.showPromotions
+  }
 }

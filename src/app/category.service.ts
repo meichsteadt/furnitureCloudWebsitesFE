@@ -7,15 +7,18 @@ import { AuthService } from './auth.service';
 import { url } from './secrets';
 import { Category } from './category.model';
 import { Product } from './product.model';
+import { UserService} from './user.service';
 
 declare var $: any;
 
 @Injectable()
 export class CategoryService {
   url: string;
-  headers = new HttpHeaders({"Authorization": this.authService.getUser()})
+  headers = new HttpHeaders({
+    "SiteAuth": this.userService.user.token
+  })
 
-  constructor(private http: HttpClient, private authService: AuthService){
+  constructor(private http: HttpClient, private authService: AuthService, private userService: UserService){
     this.url = this.getUrl() + "/categories";
   }
 
@@ -61,20 +64,10 @@ export class CategoryService {
     return categories;
   }
 
-  getCategoryProducts(categoryName, parent_category, sortBy = null, min, max): Object {
+  getCategoryProducts(categoryName, parent_category, sortBy = null, min, max): Observable<any> {
     var products: Product[] = [];
     var pages: number;
-    this.get("_products/" + categoryName + "?parent_category=" + parent_category + "&sort_by=" + sortBy + "&min_price=" + min + "&max_price=" + max).subscribe((response: Array<any>) => {
-      pages = response["pages"];
-      for(var i = 0; i < response["arr"].length; i++) {
-        var product = response["arr"][i]["product"];
-        var price = response["arr"][i]["set_price"];
-        products.push(
-          new Product(product["id"], product["name"], product["image"], product["description"], product["thumbnail"], price, product["set_name"])
-        );
-      }
-    });
-    return {products: products, pages: pages}
+    return this.get("_products/" + categoryName + "?parent_category=" + parent_category + "&sort_by=" + sortBy + "&min_price=" + min + "&max_price=" + max);
   }
 
   get(extension = "") {

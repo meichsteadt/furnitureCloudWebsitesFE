@@ -6,7 +6,7 @@
     <hr>
   </div>
   <div class="col s12 m6 l3 category-link" *ngFor="let category of categories">
-    <span class="edit" (click)="edit(category)"><i class="material-icons">edit</i></span>
+    <!-- <span class="edit" (click)="edit(category)"><i class="material-icons">edit</i></span> -->
     <a routerLink="/categories/{{category.linkName()}}">
       <div class="img-wrapper">
         <img src="{{category.image}}">
@@ -16,7 +16,7 @@
       </div>
     </a>
   </div>
-  <div class="col s12 m6 l3 category-link">
+  <div *ngIf="showPromotions()" class="col s12 m6 l3 category-link">
     <a routerLink="/promotions">
       <div class="img-wrapper">
         <img src="/assets/summer_sale.png" alt="">

@@ -8,6 +8,7 @@ import { routing } from './app.routing';
 
 import { AuthGuardService } from './auth-guard.service';
 import { AuthService } from './auth.service';
+import { UserService } from './user.service';
 import { EditService } from './edit.service';
 
 import { LoginComponent } from './login/login.component';
@@ -32,6 +33,7 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { MattressesComponent } from './mattresses/mattresses.component';
 import { PromotionsProductsComponent } from './promotions-products/promotions-products.component';
 import { EditSlideoutComponent } from './edit-slideout/edit-slideout.component';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -56,7 +58,8 @@ import { EditSlideoutComponent } from './edit-slideout/edit-slideout.component';
     MattressesComponent,
     PromotionsProductsComponent,
     LoginComponent,
-    EditSlideoutComponent
+    EditSlideoutComponent,
+    SearchComponent
   ],
   imports: [
     routing,
@@ -65,7 +68,7 @@ import { EditSlideoutComponent } from './edit-slideout/edit-slideout.component';
     HttpClientModule,
     HttpModule
   ],
-  providers: [AuthGuardService, AuthService, EditService],
+  providers: [AuthGuardService, AuthService, EditService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,9 +1,10 @@
+<h2>Displaying results for "{{query}}"</h2>
 <app-product-list
 *ngIf="loaded"
 [products]="products"
 [pages]="pages"
 [pageNumber]="pageNumber"
-(emitPage)="receivePage($event)"
 (emitSort)="receiveSort($event)"
 (emitPriceFilter)="receivePriceFilter($event)"
+(emitPage)="receivePage($event)"
 ></app-product-list>

@@ -1,7 +1,10 @@
 <app-breadcrumbs></app-breadcrumbs>
 <app-product-list
+  *ngIf="loaded"
   [products]="products"
   [pages]="pages"
+  [pageNumber]="pageNumber"
   (emitSort)="receiveSort($event)"
   (emitPriceFilter)="receivePriceFilter($event)"
+  (emitPage)="receivePage($event)"
 ></app-product-list>

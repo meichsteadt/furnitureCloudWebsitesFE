@@ -15,7 +15,7 @@ export class EditService {
     this.model$.next(model["name"]);
   }
 
-  getModel(): Observable<string> {
-    return this.model$.asObservable();
-  }
+  // getModel(): Observable<string> {
+  //   // return this.model$.asObservable();
+  // }
 }

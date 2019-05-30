@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProductService } from '../product.service';
 import { Product } from '../product.model';
 import { ProductItem } from '../product-item.model';
+import { showPrices } from '../secrets';
 
 declare var $: any;
 
@@ -17,10 +18,14 @@ export class ProductDetailsComponent implements OnInit {
   product: Product;
   productItems: ProductItem[] = [];
   relatedProducts: Product[] = [];
+  isLoaded: Boolean = false;
+  promo: Boolean = false;
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe((urlParameters) => {
+      this.isLoaded = false;
+      this.promo = false;
       this.productId = urlParameters['id'];
 
       this.productService.getProduct(this.productId).subscribe(response => {
@@ -33,8 +38,12 @@ export class ProductDetailsComponent implements OnInit {
           product["description"],
           product["thumbnail"],
           price,
-          product["set_name"]
+          product["set_name"],
+          response["promo_price"],
+          response["promo_discount"],
+          response["on_promo"]
         );
+        this.promo = response["on_promo"];
       });
 
       this.productService.getProductItems(this.productId).subscribe((response: Array<any>) => {
@@ -64,15 +73,20 @@ export class ProductDetailsComponent implements OnInit {
             product["set_name"]
           ))
         }
+      }, error => {}, () => {
+        this.isLoaded = true;
+        $(document).ready(function(){
+          $('.materialboxed').materialbox();
+          $('.collapsible').collapsible({accordion: false});
+          $('.collapsible').collapsible('open');
+          $('html,body').scrollTop(0);
+        });
       })
+    }, error => {console.log("error")}, () => (console.log("done")))
+  }
 
-      $(document).ready(function(){
-        $('.materialboxed').materialbox();
-        $('.collapsible').collapsible({accordion: false});
-        $('.collapsible').collapsible('open');
-        $('html,body').scrollTop(0);
-      });
-    })
+  showPrices() {
+    return this.showPrices
   }
 
 }

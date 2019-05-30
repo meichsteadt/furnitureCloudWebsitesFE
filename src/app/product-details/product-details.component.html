@@ -1,10 +1,19 @@
 <div class="row">
   <div class="col m12 l7">
-    <img src="{{product?.image}}" alt="{{product?.name}}" class="responsive-img materialboxed">
+    <img *ngIf="isLoaded" src="{{product?.image}}" alt="{{product?.name}}" class="responsive-img materialboxed">
   </div>
   <div class="col m12 l5">
     <h3>{{product?.name}} {{product?.setName}}</h3>
-    <h4 class="price">{{product?.price | currency: 'USD': 'symbol': '1.0-0'}}</h4>
+    <div *ngIf="promo && showPrices()">
+      <h4 class="price promo" >{{product?.promoPrice | currency: 'USD': 'symbol': '1.0-0'}}</h4>
+      <h6 class="promo-price" >{{product?.price | currency: 'USD': 'symbol': '1.0-0'}}</h6>
+      <h6 class="discount" >{{1 - product?.promoDiscount | percent}} off</h6>
+      <h4 class="on-sale" >On Sale</h4>
+    </div>
+    <div *ngIf="!promo && showPrices()">
+      <h4 class="price" >{{product?.price | currency: 'USD': 'symbol': '1.0-0'}}</h4>
+    </div>
+
     <hr>
     <p class="description">{{product?.description}}</p>
   </div>
@@ -22,12 +31,12 @@
           <table class="product-items">
             <tr>
               <th>Product</th>
-              <th>Price</th>
+              <th *ngIf="showPrices()">Price</th>
               <th>Dimensions</th>
             </tr>
             <tr *ngFor="let item of productItems">
               <td>{{item.name}}</td>
-              <td>{{item.price | currency: 'USD': 'symbol': '1.0-0'}}</td>
+              <td *ngIf="showPrices()">{{item.price | currency: 'USD': 'symbol': '1.0-0'}}</td>
               <td>{{item.dimensions}}</td>
             </tr>
           </table>

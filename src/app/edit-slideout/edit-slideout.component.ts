@@ -19,7 +19,7 @@ export class EditSlideoutComponent implements OnInit, OnDestroy {
     this.subscription = this.editService.modelObs.subscribe(model => {
       this.models.push(model)
       this.model = model;
-    }, error => console.log(error), console.log(this.model))
+    }, error => console.log(error))
   }
 
   ngOnInit() {
@@ -31,8 +31,8 @@ export class EditSlideoutComponent implements OnInit, OnDestroy {
   }
 
   closeEdit() {
-    $("#main").removeClass("edit");
-    $("#slideout").removeClass("edit");
+    // $("#main").removeClass("edit");
+    // $("#slideout").removeClass("edit");
   }
 
   receiveModel() {

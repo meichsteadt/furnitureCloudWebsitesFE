@@ -14,62 +14,57 @@ import { MattressDetailsComponent } from './mattress-details/mattress-details.co
 import { MattressesComponent } from './mattresses/mattresses.component';
 import { StoreDetailsComponent } from './store-details/store-details.component';
 import { FinancingComponent } from './financing/financing.component';
+import { SearchComponent } from './search/search.component';
 
 
 const appRoutes: Routes = [
   {
     path: '',
-    component: LandingPageComponent,
-    canActivate: [AuthGuardService]
+    component: LandingPageComponent
   },
   {
     path: 'promotions/:id',
-    component: PromotionsProductsComponent,
-    canActivate: [AuthGuardService]
+    component: PromotionsProductsComponent
   },
   {
     path: 'categories',
-    component: CategoriesComponent,
-    canActivate: [AuthGuardService]
+    component: CategoriesComponent
   },
   {
     path: 'categories/mattresses',
-    component: MattressesComponent,
-    canActivate: [AuthGuardService]
+    component: MattressesComponent
   },
   {
     path: 'categories/:parentCategory',
-    component: SubCategoriesComponent,
-    canActivate: [AuthGuardService]
+    component: SubCategoriesComponent
   },
   {
     path: 'categories/:parentCategory/:categoryName',
-    component: CategoriesProductsComponent,
-    canActivate: [AuthGuardService]
+    component: CategoriesProductsComponent
   },
   {
     path: 'products/:id',
-    component: ProductDetailsComponent,
-    canActivate: [AuthGuardService]
+    component: ProductDetailsComponent
   },
   {
     path: 'mattresses/:id',
-    component: MattressDetailsComponent,
-    canActivate: [AuthGuardService]
+    component: MattressDetailsComponent
   },
   {
     path: 'about-us',
-    component: StoreDetailsComponent,
-    canActivate: [AuthGuardService]
+    component: StoreDetailsComponent
   },
   {
     path: 'financing',
-    component: FinancingComponent,
-    canActivate: [AuthGuardService]
+    component: FinancingComponent
   },
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'search/:query',
+    component: SearchComponent
   }
 ]
 

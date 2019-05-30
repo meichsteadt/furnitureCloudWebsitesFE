@@ -59,3 +59,42 @@
 .options {
   margin: 25px auto;
 }
+
+.pagination {
+  text-align: center;
+
+  li.active {
+    background-color: #bbb;
+  }
+
+  a {
+    color: #444;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  li.disabled {
+    a:hover {
+      cursor: default;
+    }
+  }
+}
+
+.promo {
+  position: relative;
+  &::after {
+    display: block;
+    content: 'On Sale';
+    position: absolute;
+    width: auto;
+    padding: 15px;
+    top: -15px;
+    left: 25px;
+    background-color: #c91f24;
+    color: #fff;
+    font-family: 'Montserrat';
+    
+  }
+}

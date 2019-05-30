@@ -4,6 +4,7 @@ import { Category } from '../category.model';
 import { Store } from '../store.model';
 import { StoreService } from '../store.service';
 import { EditService } from '../edit.service';
+import { showPromotions } from '../secrets';
 
 declare var $: any;
 
@@ -40,6 +41,10 @@ export class LandingPageComponent implements OnInit {
     $("#main").addClass("edit");
     $("#slideout").addClass("edit");
     this.editService.setModel(category);
+  }
+
+  showPromotions() {
+    return this.showPromotions;
   }
 
 }

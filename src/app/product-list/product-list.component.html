@@ -1,5 +1,5 @@
 <div class="row">
-  <form class="col s12 m12 options">
+  <form *ngIf="showPrices()" class="col s12 m12 options">
     <div class="row">
       <div class="input-field col s12 m4">
         <select id="sortBy" (change)="sendSort($event)">
@@ -18,15 +18,33 @@
       </div>
     </div>
   </form>
-  <div class="col s12 m6 l4 box" *ngFor="let product of products">
+  <div class="col s12 m6 l4 box" *ngFor="let product of products" [class.promo]="product.onPromo">
     <a routerLink="/products/{{product.id}}">
       <div class="img-wrapper">
         <img src="{{product.thumbnail}}" alt="{{product.name}}" class="responsive-img">
       </div>
-      <div class="info">
+      <div class="info" *ngIf="showPrices">
         <h6 class="truncate">{{product.name}} {{product.setName}}</h6>
         <h5>{{product.price | currency: 'USD': 'symbol': '1.0-0'}}</h5>
+      </div>
+      <div class="info" *ngIf="!showPrices">
+        <h6 class="truncate">{{product.name}} {{product.setName}}</h6>
       </div>
     </a>
   </div>
 </div>
+<ul class="pagination" *ngIf="pages > 1">
+  <li [class.disabled]="pageNumber === 1" [class.waves-effect]="pageNumber > 1">
+    <a (click)="sendPage(pageNumber - 1)">
+      <i class="material-icons">chevron_left</i>
+    </a>
+  </li>
+  <li *ngFor="let i of pageArray" [class.active]="pageNumber == i" [class.disabled]="pageNumber === i">
+    <a (click)="sendPage(i)">{{i}}</a>
+  </li>
+  <li [class.disabled]="pageNumber === pages" [class.waves-effect]="pageNumber > pages">
+    <a (click)="sendPage(pageNumber + 1)">
+      <i class="material-icons">chevron_right</i>
+    </a>
+  </li>
+</ul>

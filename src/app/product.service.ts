@@ -5,13 +5,16 @@ import { AuthService } from './auth.service';
 
 import { url } from './secrets';
 import { Product } from './product.model';
+import { UserService} from './user.service';
 
 @Injectable()
 export class ProductService {
   url: string;
-  headers = new HttpHeaders({"Authorization": this.authService.getUser()})
+  headers = new HttpHeaders({
+  "SiteAuth": this.userService.user.token
+})
 
-  constructor(private http: HttpClient, private authService: AuthService){
+  constructor(private http: HttpClient, private authService: AuthService, private userService: UserService){
     this.url = this.getUrl() + "/products";
   }
 
@@ -21,9 +24,9 @@ export class ProductService {
 
   getProducts() {
     var products: Product[] = [];
-    var pages: number;
+    var pages: number[] = [];
     this.get().subscribe((response: Object) => {
-      pages = response["pages"];
+      pages.push(response["pages"]);
       for(var i = 0; i < response["arr"].length; i++) {
         var product = response["arr"][i]["product"];
         var price = response["arr"][i]["set_price"];
@@ -32,7 +35,7 @@ export class ProductService {
         );
       }
     });
-    return {products: products, pages: pages}
+    return {products: products, pages: pages[0]}
   }
 
   getProduct(productId) {

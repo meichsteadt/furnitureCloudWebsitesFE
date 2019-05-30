@@ -2,19 +2,23 @@ import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { AuthService } from './auth.service';
+import { Observable } from 'rxjs/Rx';
 
 import { url } from './secrets';
 import { Promotion } from './promotion.model';
 import { Product } from './product.model';
+import { UserService} from './user.service';
 
 declare var $: any;
 
 @Injectable()
 export class PromotionService {
   url: string;
-  headers = new HttpHeaders({"Authorization": this.authService.getUser()})
+  headers = new HttpHeaders({
+  "SiteAuth": this.userService.user.token
+})
 
-  constructor(private http: HttpClient, private authService: AuthService){
+  constructor(private http: HttpClient, private authService: AuthService, private userService: UserService){
     this.url = this.getUrl() + "/promotions";
   }
 
@@ -39,18 +43,8 @@ export class PromotionService {
     return this.get("/" + promotionName)
   }
 
-  getPromotionProducts(promotionName, pageNumber = 1, sortBy = "az", min = 0, max = 3000): Product[] {
-    var products: Product[] = [];
-    this.get("/" + promotionName + "/products?sort_by=" + sortBy + "&page_number=" + pageNumber + "&min_price=" + min + "&max_price=" + max).subscribe(response => {
-      for(var i = 0; i < response["arr"].length; i++) {
-        var product = response["arr"][i]["product"];
-        var price = response["arr"][i]["set_price"];
-        products.push(
-          new Product(product["id"], product["name"], product["image"], product["description"], product["thumbnail"], price, product["set_name"])
-        );
-      }
-    });
-    return products;
+  getPromotionProducts(promotionName, pageNumber = 1, sortBy = "az", min = 0, max = 3000): Observable<any> {
+    return this.get("/" + promotionName + "/products?sort_by=" + sortBy + "&page_number=" + pageNumber + "&min_price=" + min + "&max_price=" + max);
   }
 
   get(extension = "") {
