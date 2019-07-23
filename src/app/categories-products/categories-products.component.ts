@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { CategoryService } from '../category.service';
+import { AhoyService } from '../ahoy.service';
 import { Category } from '../category.model';
 import { Product } from '../product.model';
 
@@ -17,24 +18,24 @@ export class CategoriesProductsComponent implements OnInit {
   products: Product[] = [];
   pages: number;
   pageNumber: number = 1;
-  sortBy: string = "price";
+  sortBy: string = "popularity";
   minPrice: number = 0;
-  maxPrice: number = 3000;
+  maxPrice: number = 5000;
   loaded = false;
-  constructor(private route: ActivatedRoute, private categoryService: CategoryService) { }
+  constructor(private route: ActivatedRoute, private categoryService: CategoryService, private ahoy: AhoyService, private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe((urlParameters) => {
+
       this.parentCategory = urlParameters['parentCategory'];
       this.categoryName = urlParameters['categoryName'];
-
       this.getProducts();
     })
   }
 
   getProducts() {
     this.products = [];
-    this.categoryService.getCategoryProducts(this.categoryName, this.parentCategory, this.sortBy, this.minPrice, this.maxPrice).subscribe((response: Array<any>) => {
+    this.categoryService.getCategoryProducts(this.categoryName, this.parentCategory, this.sortBy, this.minPrice, this.maxPrice, this.pageNumber).subscribe((response: Array<any>) => {
       this.pages = response["pages"];
       for(var i = 0; i < response["arr"].length; i++) {
         var product = response["arr"][i]["product"];
@@ -44,10 +45,11 @@ export class CategoriesProductsComponent implements OnInit {
           new Product(product["id"], product["name"], product["image"], product["description"], product["thumbnail"], price, product["set_name"], product["promo_price"], product["promo_discount"], onPromo)
         );
       }
-    }, err =>{}, () => this.loaded = true);
+    }, err =>{}, () => {this.loaded = true;});
   }
 
   receiveSort(sortBy) {
+    this.pageNumber = 1;
     this.sortBy = sortBy;
     this.getProducts();
   }

@@ -1,20 +1,21 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs/Rx';
 
 import { AuthService } from './auth.service';
 
 import { url } from './secrets';
 import { Product } from './product.model';
-import { UserService} from './user.service';
+import { StoreAuthService} from './store-auth.service';
 
 @Injectable()
 export class ProductService {
   url: string;
   headers = new HttpHeaders({
-  "SiteAuth": this.userService.user.token
+  "SiteAuth": this.storeService.store.authToken
 })
 
-  constructor(private http: HttpClient, private authService: AuthService, private userService: UserService){
+  constructor(private http: HttpClient, private authService: AuthService, private storeService: StoreAuthService){
     this.url = this.getUrl() + "/products";
   }
 
@@ -31,11 +32,15 @@ export class ProductService {
         var product = response["arr"][i]["product"];
         var price = response["arr"][i]["set_price"];
         products.push(
-          new Product(product["id"], product["name"], product["image"], product["description"], product["thumbnail"], price, product["set_name"])
+          new Product(product["id"], product["name"], product["images"], product["description"], product["thumbnail"], price, product["set_name"], null, null, null)
         );
       }
     });
     return {products: products, pages: pages[0]}
+  }
+
+  popularProducts(): Observable<any> {
+    return this.http.get(this.getUrl() + "/popular_products", {headers: this.headers})
   }
 
   getProduct(productId) {

@@ -1,18 +1,13 @@
+<app-breadcrumbs></app-breadcrumbs>
 <div class="row">
-  <div class="col m12">
-    <a routerLink="/promotions/summer-sale2">
-      <img src="assets/summer_sale2.png" class="responsive-img z-depth-2">
-    </a>
-  </div>
-
-  <div class="col m6 s12">
-    <a routerLink="/promotions/summer-sale">
-      <img src="assets/summer_sale_thumb.png" class="responsive-img z-depth-2">
-    </a>
-  </div>
-  <div class="col m6 s12 promo3">
-    <a routerLink="/promotions/summer-sale3">
-      <img src="assets/summer_sale3_thumb.png" class="responsive-img z-depth-2">
+  <div class="col s12 m6 l4 box" *ngFor="let promotion of promotions">
+    <a routerLink="/sales/{{promotion.linkName()}}">
+      <div class="img-wrapper">
+        <img src="{{promotion.image}}" class="responsive-img" style="width: 100%;">
+      </div>
+      <h5 class="truncate black-text">{{promotion.name}}</h5>
+      <!-- <div class="info">
+      </div> -->
     </a>
   </div>
 </div>

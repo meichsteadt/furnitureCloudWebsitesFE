@@ -1,6 +1,19 @@
 nav {
-
   margin-bottom: 40px;
+  padding-bottom: 10px;
+  height: auto;
+  position: relative;
+
+  #nav-top {
+    display: block;
+    width: 82%;
+    height: 45px;
+    margin-bottom: 10px;
+
+    @media screen and (max-width: 992px) {
+      width: 100%;
+    }
+  }
 
   i {
     color: #333;
@@ -10,6 +23,7 @@ nav {
   .nav-wrapper {
     display: flex;
     justify-content: space-between;
+    // margin-top: 10px;
   }
 
   li {
@@ -32,6 +46,11 @@ nav {
     display: flex;
     align-items: center;
     align-self: center;
+
+    img {
+      height: 50px;
+      width: auto;
+    }
     h1 {
       font-size: 0.9em;
       margin: 0;

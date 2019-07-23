@@ -6,7 +6,6 @@ import { AuthService } from './auth.service';
 import { User } from './user.model';
 
 import { url } from './secrets';
-import { storeId } from './secrets';
 
 @Injectable()
 export class UserService {
@@ -30,7 +29,7 @@ export class UserService {
       if(!this.user) {
         let user;
         this.login().subscribe(response => {
-          user = new User(response["auth_token"]);
+          user = new User(response["auth_token"], response["name"]);
           this.user = user;
           resolve(user);
         });

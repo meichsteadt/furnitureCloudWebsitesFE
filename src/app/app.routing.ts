@@ -15,7 +15,9 @@ import { MattressesComponent } from './mattresses/mattresses.component';
 import { StoreDetailsComponent } from './store-details/store-details.component';
 import { FinancingComponent } from './financing/financing.component';
 import { SearchComponent } from './search/search.component';
-
+import { PromotionsComponent } from './promotions/promotions.component';
+import { SetTypesComponent } from './set-types/set-types.component';
+import { SetTypesProductsComponent } from './set-types-products/set-types-products.component';
 
 const appRoutes: Routes = [
   {
@@ -23,7 +25,7 @@ const appRoutes: Routes = [
     component: LandingPageComponent
   },
   {
-    path: 'promotions/:id',
+    path: 'sales/:id',
     component: PromotionsProductsComponent
   },
   {
@@ -43,6 +45,14 @@ const appRoutes: Routes = [
     component: CategoriesProductsComponent
   },
   {
+    path: 'categories/:parentCategory/:categoryName/sets',
+    component: SetTypesComponent
+  },
+  {
+    path: 'categories/:parentCategory/:categoryName/sets/:setTypeName',
+    component: SetTypesProductsComponent
+  },
+  {
     path: 'products/:id',
     component: ProductDetailsComponent
   },
@@ -56,11 +66,16 @@ const appRoutes: Routes = [
   },
   {
     path: 'financing',
-    component: FinancingComponent
+    component: FinancingComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'sales',
+    component: PromotionsComponent
   },
   {
     path: 'search/:query',

@@ -1,8 +1,11 @@
+<app-breadcrumbs></app-breadcrumbs>
+<h1>{{id.replace("-", " ").replace("-", " ") | titlecase}}</h1>
 <app-product-list
 *ngIf="loaded"
 [products]="products"
 [pages]="pages"
 [pageNumber]="pageNumber"
+[sortBy]="sortBy"
 (emitPage)="receivePage($event)"
 (emitSort)="receiveSort($event)"
 (emitPriceFilter)="receivePriceFilter($event)"

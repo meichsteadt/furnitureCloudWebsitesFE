@@ -2,12 +2,13 @@ import { Injectable, isDevMode } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { url } from './secrets';
-import { key } from './secrets';
-import { secret } from './secrets';
+import { secrets } from './secrets';
 
 @Injectable()
 export class AuthService {
   url: string;
+  authToken: string;
+
   constructor(private http: HttpClient, private router: Router) {
     this.url = this.getUrl();
   }
@@ -26,7 +27,11 @@ export class AuthService {
   }
 
   getUserInfo() {
-    return {user_key: key, user_secret: secret};
+    // return {user_key: key, user_secret: secret};
+  }
+
+  getStoreInfo(url) {
+    return {url: btoa(url), secret: secrets["secret"]};
   }
 
   removeToken() {
@@ -52,20 +57,20 @@ export class AuthService {
   //   })
   // }
 
-  login(email, password, _this) {
-  this.http.post(this.url + "/authenticate", {email: btoa(email), password: btoa(password)}).subscribe(
-    token => {
-      localStorage.setItem('furnitureCloudAuthToken', token['auth_token']);
-      localStorage.setItem('furnitureCloudTimestamp', (new Date().getTime() + ""));
-      _this.success()
+  login(email, password, __this) {
+  this.http.post(this.url + "/authenticate", {email: btoa(email), password: btoa(password)}, {withCredentials: true}).subscribe(
+    (token: string) => {
+      this.authToken = token;
+      __this.success()
     },
     error => {
-      _this.error(error)
+      __this.error(error)
     })
   }
 
   logout() {
     localStorage.removeItem("furnitureCloudAuthToken");
-    this.router.navigateByUrl('/login')
+    // this.router.navigateByUrl('/login')
   }
+
 }

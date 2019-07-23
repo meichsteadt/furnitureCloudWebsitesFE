@@ -2,22 +2,21 @@
   <h4>Furniture Store</h4>
   <li style="height: 48px;">
     <div class="nav-wrapper">
-      <!-- <form>
-        <div class="input-field">
-          <input id="search" type="search" placeholder="Search furniture" required>
-          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-          <i class="material-icons">close</i>
-        </div>
-      </form> -->
+      <app-nav-search [show]="false"></app-nav-search>
     </div>
   </li>
   <li><div class="divider"></div></li>
   <li><a data-target="departments-slide-out" class="sidenav-trigger"><i class="material-icons">weekend</i>Deparments</a></li>
+  <li><a data-target="promos-slide-out" class="sidenav-trigger highlight-text"><i class="material-icons highlight-text">new_releases</i>Sales</a></li>
   <li><a routerLink="/about-us"><i class="material-icons">store</i>About Us</a></li>
 </ul>
 
 <ul id="departments-slide-out" class="sidenav show-on-med-and-down">
   <li class="back"><i (click)="closeSideNav()" class="material-icons black-text medium">clear</i></li>
   <li *ngFor="let category of categories"><a routerLink="/categories/{{category.linkName()}}">{{category.name}}</a></li>
+</ul>
+<ul id="promos-slide-out" class="sidenav show-on-med-and-down">
+  <li class="back"><i (click)="closeSideNav()" class="material-icons black-text medium">clear</i></li>
+  <li *ngFor="let promotion of promotions"><a routerLink="/sales/{{promotion.linkName()}}">{{promotion.name}}</a></li>
 </ul>
 <a data-target="slide-out" class="sidenav-trigger show-on-med-and-down"><i class="material-icons">menu</i></a>

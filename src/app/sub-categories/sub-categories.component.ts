@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { CategoryService } from '../category.service';
+import { AhoyService } from '../ahoy.service';
 import { Category } from '../category.model';
+import { AuthService } from '../auth.service';
 
 declare var $: any;
 
@@ -15,10 +17,15 @@ declare var $: any;
 export class SubCategoriesComponent implements OnInit {
   parentCategory: string;
   categories: Category[] = [];
-  constructor(private route: ActivatedRoute, private categoryService: CategoryService) { }
+  edit = this.auth.authToken;
+  
+  constructor(private route: ActivatedRoute, private categoryService: CategoryService, private ahoy: AhoyService, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this.ahoy.trackView();
+
     this.route.params.subscribe((urlParameters) => {
+
       this.parentCategory = urlParameters['parentCategory'];
       this.categories = this.categoryService.getCategories(this.parentCategory);
 
@@ -27,6 +34,11 @@ export class SubCategoriesComponent implements OnInit {
       })
     })
 
+  }
+
+  goToRoute(parentCategory, category) {
+    "/categories/{{parentCategory}}/{{category.linkName()}}{{category.set()}}"
+    this.router.navigateByUrl("/categories/" + parentCategory + "/" + encodeURIComponent(category.linkName()))
   }
 
 

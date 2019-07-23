@@ -1,0 +1,46 @@
+<div *ngIf="show('stacked')">
+  <div class="row">
+    <div class="carousel carousel-slider">
+        <div class="col s12" *ngFor="let productArr of products; let last = last" class="carousel-item">
+          <div [class]="setCol()" *ngFor="let product of productArr" [class.promo]="product.onPromo">
+            <a routerLink="/products/{{product.id}}">
+              <div class="img-wrapper">
+                <img src="{{product.thumbnail}}" alt="{{product.name}}" class="responsive-img">
+              </div>
+              <div class="info">
+                <h6 class="truncate">{{product.name}} {{product.setName}}</h6>
+                <h5>{{product.price | currency: 'USD': 'symbol': '1.0-0'}}</h5>
+              </div>
+              <!-- <div class="info" *ngIf="!showPrices">
+                <h6 class="truncate">{{product.name}} {{product.setName}}</h6>
+              </div> -->
+            </a>
+          </div>
+          <ng-container *ngIf="last">{{initCarousel()}}</ng-container>
+        </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="show('flat')">
+  <div class="row">
+    <div class="carousel carousel-slider">
+        <div class="col s12" *ngFor="let productArr of products; let last = last" class="carousel-item">
+          <div [class]="setCol()" *ngFor="let product of productArr" [class.promo]="product.onPromo">
+            <a routerLink="/products/{{product.id}}">
+              <div class="img-wrapper">
+                <img src="{{product.thumbnail}}" alt="{{product.name}}" class="responsive-img">
+              </div>
+              <div class="info">
+                <h6 class="truncate">{{product.name}} {{product.setName}}</h6>
+                <h5>{{product.price | currency: 'USD': 'symbol': '1.0-0'}}</h5>
+              </div>
+              <!-- <div class="info" *ngIf="!showPrices">
+                <h6 class="truncate">{{product.name}} {{product.setName}}</h6>
+              </div> -->
+            </a>
+          </div>
+          <ng-container *ngIf="last">{{initCarousel()}}</ng-container>
+        </div>
+    </div>
+  </div>
+</div>

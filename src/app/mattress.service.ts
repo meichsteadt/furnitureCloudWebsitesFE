@@ -7,16 +7,16 @@ import { AuthService } from './auth.service';
 import { url } from './secrets';
 import { Mattress } from './mattress.model';
 import { Size } from './size.model';
-import { UserService} from './user.service';
+import { StoreAuthService } from './store-auth.service';
 
 @Injectable()
 export class MattressService {
   url: string;
   headers = new HttpHeaders({
-  "SiteAuth": this.userService.user.token
+  "SiteAuth": this.storeService.store.authToken
 })
 
-  constructor(private http: HttpClient, private authService: AuthService, private userService: UserService){
+  constructor(private http: HttpClient, private authService: AuthService, private storeService: StoreAuthService){
     this.url = this.getUrl() + "/mattresses";
   }
 

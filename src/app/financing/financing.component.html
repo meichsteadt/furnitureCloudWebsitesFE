@@ -5,6 +5,7 @@
       <th>Credit Needed</th>
       <th>Length</th>
       <th>Bank Account Needed</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -13,6 +14,9 @@
       <td><i class="material-icons {{financing.icon(financing.creditNeeded)}}">{{financing.icon(financing.creditNeeded)}}</i></td>
       <td>{{financing.length}}</td>
       <td><i class="material-icons {{financing.icon(financing.bankAccount)}}">{{financing.icon(financing.bankAccount)}}</i></td>
+      <td *ngIf="financing.url">
+        <!-- <a href="{{financing.url}}" target="_blank">Get Pre-Approved</a> -->
+      </td>
     </tr>
   </tbody>
 </table>

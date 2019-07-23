@@ -1,4 +1,4 @@
-<form class="hide-on-med-and-down" #f="ngForm" (ngSubmit)="onSubmit(search.value)">
+<form [class.hide-on-med-and-down]="show" #f="ngForm" (ngSubmit)="onSubmit(search.value)">
   <div class="input-field">
     <input id="search" type="search" placeholder="Search furniture" required name="search" ngModel #search="ngModel" required>
     <label class="label-icon" for="search"><i class="material-icons">search</i></label>

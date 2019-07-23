@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -9,7 +9,9 @@ import { routing } from './app.routing';
 import { AuthGuardService } from './auth-guard.service';
 import { AuthService } from './auth.service';
 import { UserService } from './user.service';
+import { StoreAuthService } from './store-auth.service';
 import { EditService } from './edit.service';
+import { AhoyService } from './ahoy.service';
 
 import { LoginComponent } from './login/login.component';
 
@@ -17,6 +19,7 @@ import { AppComponent } from './app.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { PromotionsComponent } from './promotions/promotions.component';
+import { LandingPromotionsComponent } from './landing-promotions/landing-promotions.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { FooterComponent } from './footer/footer.component';
@@ -34,7 +37,17 @@ import { MattressesComponent } from './mattresses/mattresses.component';
 import { PromotionsProductsComponent } from './promotions-products/promotions-products.component';
 import { EditSlideoutComponent } from './edit-slideout/edit-slideout.component';
 import { SearchComponent } from './search/search.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { NavTopComponent } from './nav-top/nav-top.component';
+import { MailChimpComponent } from './mail-chimp/mail-chimp.component';
+import { SetTypesComponent } from './set-types/set-types.component';
+import { SetTypesProductsComponent } from './set-types-products/set-types-products.component';
+import { EmailSignupComponent } from './email-signup/email-signup.component';
+import { RequestInfoComponent } from './request-info/request-info.component';
 
+import { SafePipe } from './safe.pipe';
+import { PopularProductsComponent } from './popular-products/popular-products.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +72,18 @@ import { SearchComponent } from './search/search.component';
     PromotionsProductsComponent,
     LoginComponent,
     EditSlideoutComponent,
-    SearchComponent
+    SearchComponent,
+    ShoppingCartComponent,
+    CheckoutComponent,
+    NavTopComponent,
+    MailChimpComponent,
+    LandingPromotionsComponent,
+    SetTypesComponent,
+    SetTypesProductsComponent,
+    EmailSignupComponent,
+    RequestInfoComponent,
+    SafePipe,
+    PopularProductsComponent
   ],
   imports: [
     routing,
@@ -68,7 +92,7 @@ import { SearchComponent } from './search/search.component';
     HttpClientModule,
     HttpModule
   ],
-  providers: [AuthGuardService, AuthService, EditService, UserService],
+  providers: [AuthGuardService, AuthService, EditService, UserService, Title, StoreAuthService, AhoyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

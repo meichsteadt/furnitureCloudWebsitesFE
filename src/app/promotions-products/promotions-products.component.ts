@@ -3,6 +3,8 @@ import { Product } from '../product.model';
 import { PromotionService } from '../promotion.service';
 import { ActivatedRoute } from '@angular/router';
 
+declare var $: any;
+
 @Component({
   selector: 'app-promotions-products',
   templateUrl: './promotions-products.component.html',
@@ -11,12 +13,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PromotionsProductsComponent implements OnInit {
   id: string;
-  sortBy: string = "price";
+  sortBy: string = "popular";
   products: Product[] = [];
   pages: number;
   pageNumber: number = 1;
   minPrice: number = 0;
-  maxPrice: number = 3000;
+  maxPrice: number = 5000;
   loaded = false;
   constructor(private route: ActivatedRoute, private promotionService: PromotionService) { }
 
@@ -24,6 +26,10 @@ export class PromotionsProductsComponent implements OnInit {
     this.route.params.subscribe((urlParameters) => {
       this.id = urlParameters['id'];
       this.getProducts();
+    })
+
+    $(function() {
+      $('.sidenav').sidenav('close');
     })
   }
 
@@ -43,6 +49,7 @@ export class PromotionsProductsComponent implements OnInit {
   }
 
   receiveSort(sortBy) {
+    this.pageNumber = 1;
     this.sortBy = sortBy;
     this.getProducts();
   }

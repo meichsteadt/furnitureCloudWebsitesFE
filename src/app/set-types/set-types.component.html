@@ -1,0 +1,13 @@
+<app-breadcrumbs></app-breadcrumbs>
+<div class="row">
+  <div class="col s12 m6 l4 box" *ngFor="let setType of setTypes">
+    <a routerLink="/categories/{{parentCategory}}/{{category}}/sets/{{setType.linkName()}}/">
+      <div class="img-wrapper">
+        <img src="{{setType.image}}" class="responsive-img">
+      </div>
+      <div class="info">
+        <h5 class="truncate">{{setType.name}}</h5>
+      </div>
+    </a>
+  </div>
+</div>

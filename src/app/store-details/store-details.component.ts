@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { Store } from '../store.model';
+import { Location } from '../location.model';
 import { Delivery } from '../delivery.model';
 import { Review } from '../review.model';
 import { StoreService } from '../store.service';
@@ -11,25 +13,31 @@ declare var $: any;
   selector: 'app-store-details',
   templateUrl: './store-details.component.html',
   styleUrls: ['./store-details.component.scss'],
-  providers: [StoreService, DeliveryService]
+  providers: [DeliveryService, StoreService]
 })
 export class StoreDetailsComponent implements OnInit, AfterViewInit {
-  stores: Store[];
-  reviews: Review[];
-  deliveries: Delivery[];
-  images: String[];
+  stores: Store[] = [];
+  locations: Location[] = [];
+  reviews: Review[] = [];
+  deliveries: Delivery[] = [];
+  images: String[] = [];
   carouselInit: boolean = false;
-  constructor(private storeService: StoreService, private deliveryService: DeliveryService) { }
+  gmaps: String = this.storeService.store.googleMaps;
+
+  constructor(private storeService: StoreService, private deliveryService: DeliveryService, private sanitizer: DomSanitizer) {
+
+  }
 
   ngOnInit() {
     this.stores = this.storeService.getStores();
+    this.locations = this.storeService.getLocations();
     this.deliveries = this.deliveryService.getDeliveries();
     this.images = this.storeService.getImages();
     this.reviews = this.storeService.getReviews();
 
     $(function() {
-      $('.sidenav').sidenav('close');
       $('.scrollspy').scrollSpy({scrollOffset: 200});
+      $('.sidenav').sidenav('close');
     })
   }
 
@@ -39,7 +47,7 @@ export class StoreDetailsComponent implements OnInit, AfterViewInit {
   }
 
   numCols() {
-    return "l" +  12 / this.stores.length
+    return "l" +  12 / this.locations.length
   }
 
   showHours(hours) {
@@ -56,6 +64,8 @@ export class StoreDetailsComponent implements OnInit, AfterViewInit {
       if(!this.carouselInit) {
         setTimeout(i => {
           $('.carousel').carousel({fullWidth: true, indicators: true});
+          $('.scrollspy').scrollSpy({scrollOffset: 200});
+
         }, 500)
         this.carouselInit = true;
       }

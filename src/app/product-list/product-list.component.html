@@ -3,8 +3,10 @@
     <div class="row">
       <div class="input-field col s12 m4">
         <select id="sortBy" (change)="sendSort($event)">
-          <option value="az">A-Z</option>
-          <option value="price" selected>Price</option>
+          <option value="popularity" [selected]="sortBy === 'popularity'">Popularity</option>
+          <option value="az" [selected]="sortBy === 'az'">A-Z</option>
+          <option value="price" [selected]="sortBy === 'price'">Price High to Low</option>
+          <option value="priceLowHigh" [selected]="sortBy === 'priceLowHigh'">Price Low to High</option>
         </select>
         <label>Sort By</label>
       </div>
@@ -48,3 +50,12 @@
     </a>
   </li>
 </ul>
+
+<!-- <hr>
+
+<div class="popular-items center-align">
+  <h4>Other Popular Items</h4>
+  <app-popular-products
+    [layout]="'flat'"
+  ></app-popular-products>
+</div> -->

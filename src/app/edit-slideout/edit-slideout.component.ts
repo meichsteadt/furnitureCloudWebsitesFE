@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { EditService } from '../edit.service';
 import { Subscription }   from 'rxjs';
 
@@ -8,26 +8,20 @@ declare var $: any;
   selector: 'app-edit-slideout',
   templateUrl: './edit-slideout.component.html',
   styleUrls: ['./edit-slideout.component.scss'],
-  providers: [EditService]
+  providers: []
 })
-export class EditSlideoutComponent implements OnInit, OnDestroy {
-  model: any;
-  subscription: Subscription;
-  models: string[] = [];
+export class EditSlideoutComponent implements OnInit, OnChanges {
+  @Input() model: any;
+  @Input() modelType: any;
 
   constructor(public editService: EditService) {
-    this.subscription = this.editService.modelObs.subscribe(model => {
-      this.models.push(model)
-      this.model = model;
-    }, error => console.log(error))
+
   }
 
   ngOnInit() {
   }
 
-  ngOnDestroy() {
-    // prevent memory leak when component destroyed
-    this.subscription.unsubscribe();
+  ngOnChanges() {
   }
 
   closeEdit() {

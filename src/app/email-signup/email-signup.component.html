@@ -1,0 +1,10 @@
+<form id="email-form" class="browser-default" #f="ngForm" (ngSubmit)="onSubmit(email.value)">
+  <p class="copy">Stay up to date with our sales and promotions!</p>
+  <div class="input-field">
+    <input class="browser-default" name="email" ngModel type="email" id="email" #email="ngModel" required>
+    <label for="email">Email Address</label>
+    <button class="bttn" type="submit">Submit</button>
+    <p id="error"></p>
+  </div>
+</form>
+<p id="email-success"></p>

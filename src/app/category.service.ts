@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
 import { url } from './secrets';
 import { Category } from './category.model';
 import { Product } from './product.model';
-import { UserService} from './user.service';
+import { StoreAuthService } from './store-auth.service';
 
 declare var $: any;
 
@@ -15,10 +15,10 @@ declare var $: any;
 export class CategoryService {
   url: string;
   headers = new HttpHeaders({
-    "SiteAuth": this.userService.user.token
+    "SiteAuth": this.storeService.store.authToken
   })
 
-  constructor(private http: HttpClient, private authService: AuthService, private userService: UserService){
+  constructor(private http: HttpClient, private authService: AuthService, private storeService: StoreAuthService){
     this.url = this.getUrl() + "/categories";
   }
 
@@ -35,7 +35,8 @@ export class CategoryService {
           new Category(
             parentCategory["id"],
             parentCategory["name"],
-            parentCategory["image"]
+            parentCategory["image"],
+            false
           )
         )
       }
@@ -56,7 +57,8 @@ export class CategoryService {
           new Category(
             category["id"],
             category["name"],
-            category["image"]
+            category["image"],
+            category['has_sets']
           )
         )
       }
@@ -64,10 +66,10 @@ export class CategoryService {
     return categories;
   }
 
-  getCategoryProducts(categoryName, parent_category, sortBy = null, min, max): Observable<any> {
+  getCategoryProducts(categoryName, parent_category, sortBy = null, min, max, pageNumber): Observable<any> {
     var products: Product[] = [];
     var pages: number;
-    return this.get("_products/" + categoryName + "?parent_category=" + parent_category + "&sort_by=" + sortBy + "&min_price=" + min + "&max_price=" + max);
+    return this.get("_products/" + categoryName + "?parent_category=" + parent_category + "&sort_by=" + sortBy + "&min_price=" + min + "&max_price=" + max + "&page_number=" + pageNumber);
   }
 
   get(extension = "") {

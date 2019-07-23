@@ -7,17 +7,17 @@ import { AuthService } from './auth.service';
 import { url } from './secrets';
 import { storeId } from './secrets';
 import { Delivery } from './delivery.model';
-import { UserService} from './user.service';
-
+import { StoreAuthService } from './store-auth.service';
 @Injectable()
 export class DeliveryService {
   url: string;
+  store = this.storeService.store;
   headers = new HttpHeaders({
-  "SiteAuth": this.userService.user.token
-})
+    "SiteAuth": this.storeService.store.authToken
+  })
 
-  constructor(private http: HttpClient, private authService: AuthService, private userService: UserService){
-    this.url = this.getUrl() + "/stores/" + storeId + "/deliveries";
+  constructor(private http: HttpClient, private authService: AuthService, private storeService: StoreAuthService){
+    this.url = this.getUrl() + "/stores/" + this.store.id + "/deliveries";
   }
 
   getUrl() {

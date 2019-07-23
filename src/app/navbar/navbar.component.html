@@ -1,13 +1,22 @@
 <nav class="white">
+  <app-nav-top *ngIf="showTop" id="nav-top"></app-nav-top>
   <div class="nav-wrapper">
-    <app-sidenav [categories]="categories" [store]="store"></app-sidenav>
-    <a routerLink="/" class="brand-logo"><h1>{{store?.name}}</h1></a>
+    <app-sidenav
+      [categories]="categories"
+      [store]="store"
+      [promotions]="promotions"
+    ></app-sidenav>
+    <!-- <a routerLink="/" class="brand-logo"><h1>{{store?.name}}</h1></a> -->
+    <a routerLink="/" class="brand-logo">
+      <img src="{{store?.logo}}" class="responsive-img">
+      <h1 *ngIf="!store.logo">{{store?.name}}</h1>
+    </a>
     <ul id="nav-mobile" class="right hide-on-med-and-down valign-wrapper">
       <li><a id="categories-trigger" class="dropdown-trigger" data-target="categories">Furniture<i class="material-icons right">keyboard_arrow_down</i></a></li>
-      <li *ngIf="showPromotions()"><a id="promotions-trigger" class="dropdown-trigger" data-target="promotions">Promotions<i class="material-icons right">keyboard_arrow_down</i></a></li>
-      <li><a routerLink="/about-us">About Us</a></li>
+      <li *ngIf="showPromotions()"><a id="promotions-trigger" class="dropdown-trigger highlight-text" data-target="promotions">Sales<i class="material-icons right  highlight-text">keyboard_arrow_down</i></a></li>
+      <!-- <li><a routerLink="/about-us">About Us</a></li> -->
     </ul>
-    <app-nav-search [ngStyle]="{'flex-grow': 2, 'margin-right': '25px'}"></app-nav-search>
+    <app-nav-search [show]="true" [ngStyle]="{'flex-grow': 2, 'margin-right': '25px'}"></app-nav-search>
   </div>
 </nav>
 
@@ -20,14 +29,16 @@
       <p class="center-align">{{category.name}}</p>
     </a>
   </li>
+  <div style="min-height: 170px; display: block;"></div>
 </ul>
 <ul *ngIf="showPromotions()" id="promotions" class="dropdown-content row">
   <li class="col s3" *ngFor="let promotion of promotions">
-    <a routerLink="/promotions/{{promotion.linkName()}}" class="promotion">
+    <a routerLink="/sales/{{promotion.linkName()}}" class="promotion">
       <span class="img-wrapper">
         <img src="{{promotion.image}}" class="responsive-img">
       </span>
       <p class="center-align">{{promotion.name}}</p>
     </a>
   </li>
+  <div style="min-height: 150px; display: inline-block;"></div>
 </ul>

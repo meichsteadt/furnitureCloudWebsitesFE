@@ -1,6 +1,19 @@
-<div class="body">
-  <i (click)="closeEdit()" class="material-icons">clear</i>
-  <button (click)="receiveModel()">receive</button>
-  <p>{{model}}</p>
-  <p *ngFor="let model of models">{{model}}</p>
+<div class="row">
+  <i class="material-icons sidenav-close right">close</i>
+  <h2>Edit {{modelType}}</h2>
+  <div class="input-field col s12">
+    <input placeholder="Name" id="name" type="text" value="{{model?.name}}">
+    <label for="name"  class="active">Name</label>
+ </div>
+  <div class="input-field col s12">
+    <input placeholder="Image" id="image" type="text" value="{{model?.image}}">
+    <label for="image" class="active">Image</label>
+    <img src="{{model?.image}}" class="responsive-img">
+ </div>
+  <div class="input-field col s12">
+    <!-- <input placeholder="Name" id="name" type="text"> -->
+ </div>
+  <div class="input-field col s12">
+    <!-- <input placeholder="Name" id="name" type="text"> -->
+ </div>
 </div>

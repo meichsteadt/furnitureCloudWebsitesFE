@@ -5,9 +5,14 @@
 i {
   position: absolute;
   top: 5px;
-  right: 5px;
+  right: 15px;
+  z-index: 9999;
 
   &:hover {
     cursor: pointer;
   }
+}
+
+.row {
+  padding: 15px;
 }

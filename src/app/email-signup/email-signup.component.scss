@@ -1,0 +1,70 @@
+@import '../../variables.scss';
+
+p {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+.input-field {
+  height: 45px;
+  display: inline-block;
+
+  label {
+    top: 3px;
+    left: 10px;
+
+    &.active {
+      transform: translateY(-30px) !important;
+    }
+  }
+}
+
+input {
+  height: 100%;
+  width: 300px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border: 1px solid #ccc;
+  padding-left: 10px;
+
+  @media screen and (max-width: 500px) {
+    & {
+      width: auto;
+    }
+  }
+}
+
+.bttn {
+  border: 1px solid transparent;
+  position: relative;
+  left: -5px;
+  height: 100%;
+  padding: 0 2em;
+  color: #fff;
+  background-color: $primary-color;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  font-family: 'Open Sans' !important;
+  transition: background-color .3s ease;
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken($primary-color, 10%)
+  }
+}
+
+.input-field {
+  position: relative;
+}
+
+#error {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  color: $highlight-color;
+  text-align: left;
+}
+
+#email-success {
+  display: none;
+}

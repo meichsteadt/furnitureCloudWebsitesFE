@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Rx';
 import { url } from './secrets';
 import { Promotion } from './promotion.model';
 import { Product } from './product.model';
-import { UserService} from './user.service';
+import { StoreAuthService} from './store-auth.service';
 
 declare var $: any;
 
@@ -15,10 +15,10 @@ declare var $: any;
 export class PromotionService {
   url: string;
   headers = new HttpHeaders({
-  "SiteAuth": this.userService.user.token
-})
+    "SiteAuth": this.storeService.store.authToken
+  })
 
-  constructor(private http: HttpClient, private authService: AuthService, private userService: UserService){
+  constructor(private http: HttpClient, private authService: AuthService, private storeService: StoreAuthService){
     this.url = this.getUrl() + "/promotions";
   }
 

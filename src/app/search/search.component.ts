@@ -11,18 +11,19 @@ import { Product } from '../product.model';
   providers: [SearchService]
 })
 export class SearchComponent implements OnInit {
-  products: Product[];
-  sortBy: string = "price";
+  products: Product[] = [];
+  sortBy: string = "popularity";
   pages: number;
   pageNumber: number = 1;
   query: String = "";
   minPrice: number = 0;
-  maxPrice: number = 3000;
+  maxPrice: number = 5000;
   loaded = false;
 
   constructor(private route: ActivatedRoute, private searchService: SearchService) { }
 
   ngOnInit() {
+
     this.route.params.subscribe((urlParameters) => {
       this.query = urlParameters['query'];
       this.getProducts();
@@ -36,14 +37,16 @@ export class SearchComponent implements OnInit {
       for(var i = 0; i < response["arr"].length; i++) {
         var product = response["arr"][i]["product"];
         var price = response["arr"][i]["set_price"];
+        var onPromo = response["arr"][i]["on_promo"];
         this.products.push(
-          new Product(product["id"], product["name"], product["image"], product["description"], product["thumbnail"], price, product["set_name"], product["promo_price"], response["promo_discount"], response["on_promo"])
+          new Product(product["id"], product["name"], product["image"], product["description"], product["thumbnail"], price, product["set_name"], product["promo_price"], response["promo_discount"], onPromo)
         );
       }
     }, err =>{}, () => this.loaded = true);
   }
 
   receiveSort(sortBy) {
+    this.pageNumber = 1;
     this.sortBy = sortBy;
     this.getProducts();
   }

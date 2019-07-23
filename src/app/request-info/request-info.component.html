@@ -1,0 +1,43 @@
+<div>
+  <button type="button" class="modal-trigger open" data-target="modal1">Request More Info</button>
+</div>
+
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h5>Request More Info</h5>
+    <form id="infoRequest" #f="ngForm" (ngSubmit)="onSubmit(name.value, email.value, note.value)">
+      <div class="input-field">
+        <input name="name" ngModel type="text" id="name" #name="ngModel" required>
+        <label for="name">Name*</label>
+      </div>
+      <div class="input-field">
+        <input name="email" ngModel type="email" id="email" #email="ngModel" required>
+        <label for="email">Email Address*</label>
+      </div>
+      <div class="input-field">
+        <textarea name="note" ngModel #note="ngModel" id="note" class="materialize-textarea"></textarea>
+        <label for="note">Additional notes</label>
+      </div>
+      <button [disabled]="!f.form.valid" class="submit" type="submit">Submit</button>
+      <p class="footnote">*required</p>
+      <p id="error">Something went wrong on our end. You can try again later or reach us here: <a href="mailto:{{store?.email}}?subject=Product Info Request" target="_blank">{{store?.email}}</a></p>
+    </form>
+
+    <p id="success">Thanks for reaching out! We'll get back to you soon with more info.</p>
+
+
+    <!-- <form #f="ngForm" (ngSubmit)="onSubmit(email.value, password.value)">
+      <div class="input-field">
+        <input name="email" ngModel type="email" id="email" #email="ngModel" required>
+        <label for="email">Email</label>
+      </div>
+      <div class="input-field">
+        <input name="password" ngModel type="password" id="password" #password="ngModel" required>
+        <label for="password">Password</label>
+      </div>
+      <button [disabled]="!f.form.valid" class="btn right" type="submit">Log in</button>
+
+    </form> -->
+
+  </div>
+</div>

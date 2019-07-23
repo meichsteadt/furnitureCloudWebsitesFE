@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ProductService } from '../product.service';
 import { Product } from '../product.model';
 import { ProductItem } from '../product-item.model';
+import { AhoyService} from '../ahoy.service';
 import { showPrices } from '../secrets';
 
 declare var $: any;
@@ -20,13 +21,14 @@ export class ProductDetailsComponent implements OnInit {
   relatedProducts: Product[] = [];
   isLoaded: Boolean = false;
   promo: Boolean = false;
-  constructor(private productService: ProductService, private route: ActivatedRoute) { }
+  constructor(private productService: ProductService, private route: ActivatedRoute, private ahoy: AhoyService) { }
 
   ngOnInit() {
     this.route.params.subscribe((urlParameters) => {
       this.isLoaded = false;
       this.promo = false;
       this.productId = urlParameters['id'];
+      this.ahoy.trackView({product_id: this.productId});
 
       this.productService.getProduct(this.productId).subscribe(response => {
         var product = response["product"];
@@ -34,7 +36,7 @@ export class ProductDetailsComponent implements OnInit {
         this.product = new Product(
           product["id"],
           product["name"],
-          product["image"],
+          product["images"],
           product["description"],
           product["thumbnail"],
           price,
@@ -70,7 +72,10 @@ export class ProductDetailsComponent implements OnInit {
             product["description"],
             product["thumbnail"],
             product["price"],
-            product["set_name"]
+            product["set_name"],
+            null,
+            null,
+            null
           ))
         }
       }, error => {}, () => {
@@ -80,6 +85,7 @@ export class ProductDetailsComponent implements OnInit {
           $('.collapsible').collapsible({accordion: false});
           $('.collapsible').collapsible('open');
           $('html,body').scrollTop(0);
+          $('.modal').modal();
         });
       })
     }, error => {console.log("error")}, () => (console.log("done")))

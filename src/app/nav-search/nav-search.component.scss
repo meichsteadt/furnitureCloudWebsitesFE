@@ -1,6 +1,27 @@
 form {
-  label.active i {
-    color: #ddd;
+  border: 1px solid #ccc;
+  height: 80%;
+  margin: 1% 0;
+  display: flex;
+  flex-grow: 1;
+  align-self: center;
+
+  .input-field {
+    width: 100%;
+  }
+
+  label {
+    height: 100%;
+
+    i {
+      color: #ddd !important;
+    }
+  }
+
+  i {
+    height: 100%;
+    position: absolute;
+    transform: translateY(-12.5%);
   }
 
   .input-field input[type=search]:focus:not(.browser-default) i, .input-field input[type=search]:focus:not(.browser-default) + label i {
@@ -9,6 +30,6 @@ form {
 }
 
 .nav-wrapper .input-field input[type=search] {
-  height: 80%;
+  height: 80% !important;
   border-bottom: 1px solid #ddd;
 }

@@ -1,7 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import './variables.scss';
+
 body {
   font-family: 'Open Sans';
   color: #444;
+  overflow-x: hidden;
 }
 
 app-root {
@@ -99,4 +102,20 @@ main {
 
 #navbar {
   // z-index: 99;
+}
+
+.highlight-text {
+  color: $highlight-color !important;
+}
+
+
+#email-signup {
+  margin: 0 -10%;
+  padding: 0 10%;
+  height: 150px;
+  border: 1px solid #ccc;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

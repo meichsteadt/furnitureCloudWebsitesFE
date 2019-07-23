@@ -1,22 +1,43 @@
-<app-promotions></app-promotions>
+<app-landing-promotions></app-landing-promotions>
 <div class="row">
   <div class="welcome center-align">
     <h5>Welcome to</h5>
     <h2>{{store?.name}}</h2>
     <hr>
   </div>
-  <div class="col s12 m6 l3 category-link" *ngFor="let category of categories">
-    <!-- <span class="edit" (click)="edit(category)"><i class="material-icons">edit</i></span> -->
-    <a routerLink="/categories/{{category.linkName()}}">
-      <div class="img-wrapper">
-        <img src="{{category.image}}">
-      </div>
-      <div class="info">
-        <h6>{{category.name}}</h6>
-      </div>
-    </a>
+  <div class="popular-items center-align">
+    <h4>Popular Items</h4>
+    <app-popular-products
+      [layout]="'flat'"
+    ></app-popular-products>
   </div>
-  <div *ngIf="showPromotions()" class="col s12 m6 l3 category-link">
+  <div class="categories center-align">
+    <h4>Shop by Category</h4>
+    <div class="col s12 m6 l3 category-link" *ngFor="let category of categories">
+      <span *ngIf="edit" class="edit" (click)="editCategory(category)"><i class="material-icons">edit</i></span>
+      <a routerLink="/categories/{{category.linkName()}}">
+        <div class="img-wrapper">
+          <img src="{{category.image}}">
+        </div>
+        <div class="info">
+          <h6>{{category.name}}</h6>
+        </div>
+      </a>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+
+  <div *ngIf="edit">
+    <ul id="edit-category" class="sidenav">
+      <app-edit-slideout [modelType]="modelType" [model]="model"></app-edit-slideout>
+    </ul>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.sidenav').sidenav();
+      });
+    </script>
+  </div>
+  <!-- <div *ngIf="showPromotions()" class="col s12 m6 l3 category-link">
     <a routerLink="/promotions">
       <div class="img-wrapper">
         <img src="/assets/summer_sale.png" alt="">
@@ -25,5 +46,6 @@
         <h6>Promotions</h6>
       </div>
     </a>
-  </div>
+  </div> -->
 </div>
+<app-email-signup id="email-signup"></app-email-signup>

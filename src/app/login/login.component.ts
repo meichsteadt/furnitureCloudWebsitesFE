@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import * as $ from 'jquery';
+
+declare var $: any;
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  providers: [AuthService]
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   email: string = "";
@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
   }
 
   error(error) {
-    console.log(error);
     $('.error').show();
   }
 

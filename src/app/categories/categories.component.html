@@ -1,7 +1,7 @@
 <app-breadcrumbs></app-breadcrumbs>
 <div class="row">
   <div class="col s12 m6 l4 box" *ngFor="let category of categories">
-    <a routerLink="/categories/{{category.linkName()}}">
+    <a routerLink="/categories/{{category.encodeUrl()}}">
       <div class="img-wrapper">
         <img src="{{category.image}}" class="responsive-img" style="width: 100%;">
       </div>
@@ -10,4 +10,5 @@
       </div>
     </a>
   </div>
+  <div class="clearfix"></div>
 </div>
