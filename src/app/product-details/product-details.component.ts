@@ -88,6 +88,8 @@ export class ProductDetailsComponent implements OnInit {
           $('.modal').modal();
         });
       })
+      $('#cart-slide-out').sidenav('close');
+      
     }, error => {console.log("error")}, () => (console.log("done")))
   }
 

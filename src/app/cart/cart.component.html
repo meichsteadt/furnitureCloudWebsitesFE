@@ -1,0 +1,6 @@
+<ul id="cart-slide-out" class="sidenav show-on-med-and-down">
+  <h4>Shopping Cart</h4>
+  <div *ngFor="let product of products" class="cart-item row">
+    <a routerLink="/products/{{product.id}}"><app-cart-item [product]="product"></app-cart-item></a>
+  </div>
+</ul>

@@ -9,6 +9,7 @@ declare var ahoy;
 @Injectable()
 export class AhoyService {
   url: string;
+  visitId: string;
 
   headers = new HttpHeaders({
     "SiteAuth": null
@@ -21,15 +22,21 @@ export class AhoyService {
     return isDevMode()? url.devUrl : url.prodUrl;
   }
 
-  init() {
+  debug() {
+    ahoy.debug();
+  }
+
+  init(utm_campaign = null, utm_source=null) {
     ahoy.configure({
       urlPrefix: this.getUrl(),
       visitsUrl: "/ahoy/visits",
       eventsUrl: "/ahoy/events",
       withCredentials: false,
+      visitParams: {store_id: this.storeService.store.id},
       headers: {"SiteAuth": this.storeService.store.authToken}
     });
     ahoy.start();
+    this.visitId = ahoy.getVisitId();
   }
 
   trackView(addData = null) {

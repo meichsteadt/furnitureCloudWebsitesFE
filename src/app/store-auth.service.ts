@@ -19,7 +19,6 @@ export class StoreAuthService {
   store;
 
   constructor(private http: HttpClient, private authService: AuthService, private userService: UserService){
-
   }
 
   getUrl() {

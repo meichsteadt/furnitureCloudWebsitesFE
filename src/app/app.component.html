@@ -1,4 +1,4 @@
-<div id="ready" *ngIf="ready && !edit">
+<div id="ready" *ngIf="ready && edit">
   <a routerLink="/financing">fin</a>
   <a routerLink="/login">log</a>
   <app-navbar id="navbar"></app-navbar>
@@ -14,7 +14,7 @@
   <app-footer></app-footer>
 </div>
 
-<div *ngIf="edit">
+<div *ngIf="ready && !edit">
   <app-navbar id="navbar"></app-navbar>
   <main class="container">
     <div id="main">

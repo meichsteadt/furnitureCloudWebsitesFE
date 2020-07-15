@@ -19,7 +19,7 @@ export class SidenavComponent implements OnInit {
 
   ngOnInit() {
     $(document).ready(function(){
-      $('.sidenav').sidenav();
+      $('#slide-out').sidenav();
     });
   }
 

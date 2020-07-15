@@ -6,6 +6,7 @@
       [store]="store"
       [promotions]="promotions"
     ></app-sidenav>
+    <app-cart></app-cart>
     <!-- <a routerLink="/" class="brand-logo"><h1>{{store?.name}}</h1></a> -->
     <a routerLink="/" class="brand-logo">
       <img src="{{store?.logo}}" class="responsive-img">
@@ -15,6 +16,10 @@
       <li><a id="categories-trigger" class="dropdown-trigger" data-target="categories">Furniture<i class="material-icons right">keyboard_arrow_down</i></a></li>
       <li *ngIf="showPromotions()"><a id="promotions-trigger" class="dropdown-trigger highlight-text" data-target="promotions">Sales<i class="material-icons right  highlight-text">keyboard_arrow_down</i></a></li>
       <!-- <li><a routerLink="/about-us">About Us</a></li> -->
+    </ul>
+    <ul class="right hide-on-med-and-down valign-wrapper">
+      <li><a data-target="cart-slide-out" class="sidenav-trigger" style="display: block;">Cart<span id="cart_item_num" class="badge"></span></a></li>
+      <li><a>Login</a></li>
     </ul>
     <app-nav-search [show]="true" [ngStyle]="{'flex-grow': 2, 'margin-right': '25px'}"></app-nav-search>
   </div>
@@ -32,7 +37,7 @@
   <div style="min-height: 170px; display: block;"></div>
 </ul>
 <ul *ngIf="showPromotions()" id="promotions" class="dropdown-content row">
-  <li class="col s3" *ngFor="let promotion of promotions">
+  <li class="col s4" *ngFor="let promotion of promotions">
     <a routerLink="/sales/{{promotion.linkName()}}" class="promotion">
       <span class="img-wrapper">
         <img src="{{promotion.image}}" class="responsive-img">

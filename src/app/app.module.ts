@@ -48,6 +48,8 @@ import { RequestInfoComponent } from './request-info/request-info.component';
 
 import { SafePipe } from './safe.pipe';
 import { PopularProductsComponent } from './popular-products/popular-products.component';
+import { CartComponent } from './cart/cart.component';
+import { CartItemComponent } from './cart-item/cart-item.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +85,9 @@ import { PopularProductsComponent } from './popular-products/popular-products.co
     EmailSignupComponent,
     RequestInfoComponent,
     SafePipe,
-    PopularProductsComponent
+    PopularProductsComponent,
+    CartComponent,
+    CartItemComponent
   ],
   imports: [
     routing,

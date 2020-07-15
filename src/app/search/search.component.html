@@ -23,3 +23,5 @@
 (emitPriceFilter)="receivePriceFilter($event)"
 (emitPage)="receivePage($event)"
 ></app-product-list>
+
+<h1 *ngIf="loaded && noProducts">Sorry, we couldn't find anything matching that.</h1>

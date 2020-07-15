@@ -73,11 +73,14 @@ nav {
   }
 
   .dropdown-content {
+
     li {
+      min-height: 15vw;
       clear: none;
       margin: 10px auto;
-      height: 120px;
+      margin-top: 2%;
       text-align: center;
+      height: 90%;
 
       &:hover {
         background-color: inherit;
@@ -97,6 +100,7 @@ nav {
 
         img {
           margin-top: 5px;
+
         }
       }
     }
@@ -105,23 +109,28 @@ nav {
 
 
   ul {
+
     a {
+      height: inherit;
+
       &:hover {
         background-color: transparent;
       }
     }
   }
 
-  #categories {
+  #categories, #promotions {
     .img-wrapper {
       display: block;
       position: relative;
       width: 100%;
-      height: 90px;
+      height: inherit;
       overflow: hidden;
 
       img {
-        width: 100%;
+        // width: 100%;
+        height: 100%;
+        overflow: hidden;
         position: absolute;
         left: 50%;
         top: 50%;

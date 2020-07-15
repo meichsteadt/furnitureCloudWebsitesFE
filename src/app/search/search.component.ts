@@ -19,6 +19,7 @@ export class SearchComponent implements OnInit {
   minPrice: number = 0;
   maxPrice: number = 5000;
   loaded = false;
+  noProducts: boolean = false;
 
   constructor(private route: ActivatedRoute, private searchService: SearchService) { }
 
@@ -32,6 +33,7 @@ export class SearchComponent implements OnInit {
 
   getProducts() {
     this.products = []
+    this.noProducts = false;
     this.searchService.getProducts(this.query, this.sortBy, this.minPrice, this.maxPrice, this.pageNumber).subscribe(response => {
       this.pages = response["pages"];
       for(var i = 0; i < response["arr"].length; i++) {
@@ -42,7 +44,12 @@ export class SearchComponent implements OnInit {
           new Product(product["id"], product["name"], product["image"], product["description"], product["thumbnail"], price, product["set_name"], product["promo_price"], response["promo_discount"], onPromo)
         );
       }
-    }, err =>{}, () => this.loaded = true);
+    }, err =>{}, () => {
+      this.loaded = true;
+      if(this.products.length == 0) {
+        this.noProducts = true;
+      }
+    });
   }
 
   receiveSort(sortBy) {
