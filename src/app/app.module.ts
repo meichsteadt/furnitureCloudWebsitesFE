@@ -101,8 +101,7 @@ import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
     HttpClientModule,
     StoreModule.forRoot(),
     AhoyModule.forRoot(),
-    CartModule.forRoot(),
-    HttpModule
+    CartModule.forRoot()
   ],
   providers: [AuthGuardService, AuthService, CartService, EditService, UserService, Title, StoreAuthService, AhoyService],
   bootstrap: [AppComponent]

@@ -11,7 +11,6 @@ import { Title }     from '@angular/platform-browser';
 import { HttpHeaders } from '@angular/common/http';
 import { AuthGuardService } from './auth-guard.service';
 import { url } from './secrets';
-import {URLSearchParams} from '@angular/http';
 
 declare var ahoy;
 
