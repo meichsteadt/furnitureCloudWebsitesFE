@@ -18,8 +18,15 @@ declare var $: any;
 export class StoreAuthService {
   store;
 
-  constructor(private http: HttpClient, private authService: AuthService, private userService: UserService){
-  }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private userService: UserService
+    ){
+      this._getStoreAuth().then(res => {
+        this.store = res["store"];
+      });
+    };
 
   getUrl() {
     return isDevMode()? url.devUrl : url.prodUrl;
@@ -53,8 +60,38 @@ export class StoreAuthService {
             response["store"]["google_maps"],
             response["store"]["email"]
           );
-          this.store = store;
+          // this.store = store;
           resolve({store: store, this: __this});
+        }, error => {});
+      }
+      else {
+        resolve(this.store)
+      }
+    })
+  }
+
+  _getStoreAuth() {
+    let hostUrl = window.location.hostname;
+    return new Promise((resolve, reject) =>  {
+      if(!this.store) {
+        let store;
+        this.authenticate(hostUrl).subscribe(response => {
+          store = new Store(
+            response["auth_token"],
+            response["store"]["id"],
+            response["store"]["name"],
+            response["store"]["logo"],
+            response["store"]["favicon"],
+            response["store"]["yelp"],
+            response["store"]["facebook"],
+            response["store"]["instagram"],
+            response["store"]["twitter"],
+            response["store"]["google_reviews_id"],
+            response["store"]["yellow_pages"],
+            response["store"]["google_maps"],
+            response["store"]["email"]
+          );
+          resolve({store: store});
         }, error => {});
       }
       else {

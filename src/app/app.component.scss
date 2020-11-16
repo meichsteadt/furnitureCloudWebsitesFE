@@ -1,6 +1,12 @@
+@import '../variables.scss';
+
+main {
+  min-height: 70vh;
+}
+
 .container {
-  max-width: none;
-  width: 90%;
+  max-width: 1600px;
+  // width: 66%;
 }
 
 // #main {

@@ -10,12 +10,13 @@ declare var ahoy;
 export class AhoyService {
   url: string;
   visitId: string;
-
-  headers = new HttpHeaders({
+  storeService: StoreAuthService;
+  headers: HttpHeaders = new HttpHeaders({
     "SiteAuth": null
   })
 
-  constructor(private storeService: StoreAuthService){
+  constructor(_storeService: StoreAuthService){
+    this.storeService = _storeService;
   }
 
   getUrl() {

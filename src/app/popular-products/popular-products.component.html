@@ -28,7 +28,7 @@
           <div [class]="setCol()" *ngFor="let product of productArr" [class.promo]="product.onPromo">
             <a routerLink="/products/{{product.id}}">
               <div class="img-wrapper">
-                <img src="{{product.thumbnail}}" alt="{{product.name}}" class="responsive-img">
+                <img src="{{product.thumbnail}}" alt="{{product.name}}">
               </div>
               <div class="info">
                 <h6 class="truncate">{{product.name}} {{product.setName}}</h6>

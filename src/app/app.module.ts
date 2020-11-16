@@ -9,9 +9,13 @@ import { routing } from './app.routing';
 import { AuthGuardService } from './auth-guard.service';
 import { AuthService } from './auth.service';
 import { UserService } from './user.service';
+import { CartService } from './cart.service';
+import { CartModule } from './cart/cart.module';
+import { StoreModule } from './store/store.module';
 import { StoreAuthService } from './store-auth.service';
 import { EditService } from './edit.service';
 import { AhoyService } from './ahoy.service';
+import { AhoyModule } from './ahoy/ahoy.module';
 
 import { LoginComponent } from './login/login.component';
 
@@ -50,6 +54,7 @@ import { SafePipe } from './safe.pipe';
 import { PopularProductsComponent } from './popular-products/popular-products.component';
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
+import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
 
 @NgModule({
   declarations: [
@@ -87,16 +92,20 @@ import { CartItemComponent } from './cart-item/cart-item.component';
     SafePipe,
     PopularProductsComponent,
     CartComponent,
-    CartItemComponent
+    CartItemComponent,
+    AddToCartComponent
   ],
   imports: [
     routing,
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    StoreModule.forRoot(),
+    AhoyModule.forRoot(),
+    CartModule.forRoot(),
     HttpModule
   ],
-  providers: [AuthGuardService, AuthService, EditService, UserService, Title, StoreAuthService, AhoyService],
+  providers: [AuthGuardService, AuthService, CartService, EditService, UserService, Title, StoreAuthService, AhoyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

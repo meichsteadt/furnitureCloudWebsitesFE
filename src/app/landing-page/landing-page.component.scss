@@ -1,3 +1,6 @@
+@import '../../variables.scss';
+
+
 .category-link {
   position: relative;
   overflow: hidden;
@@ -22,11 +25,13 @@
   .img-wrapper {
 
     overflow: hidden;
-    left: 15px;
 
     img {
-      height: 23vw;
-      
+      height: 15vw;
+      @media screen and (max-width: $s) {
+        height: auto;
+        width: 100vw;
+      }
       transition: transform .3s ease;
     }
   }

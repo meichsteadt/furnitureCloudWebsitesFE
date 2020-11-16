@@ -95,6 +95,9 @@ export class PopularProductsComponent implements OnInit, AfterViewInit {
     else if(width < 992) {
       this.perPanel = 2;
     }
+    else if(width < 1800) {
+      this.perPanel = 3;
+    }
     else {
       this.perPanel = 4;
     }

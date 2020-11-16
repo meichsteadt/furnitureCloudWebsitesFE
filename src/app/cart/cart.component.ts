@@ -9,34 +9,34 @@ declare var $:any;
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss'],
-  providers: [CartService]
+  styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
   products: Product[];
   cart: Cart;
-
+  _cartService: CartService;
   constructor(
-    private cartService: CartService,
-    private ahoy: AhoyService
-  ) { }
-
-  ngOnInit() {
-    var setCartProducts = (products) => {
+    private ahoy: AhoyService,
+    cartService: CartService
+  ) {
+    this._cartService = cartService;
+    this._cartService.cartProducts.subscribe(products => {
       this.products = products;
       $("#cart_item_num").text(products.length);
-    }
+    });
+  }
 
-    var setCart = (cart) => {
-      this.cart = cart;
-      this.cartService.getCartItems(cart, setCartProducts);
-    }
-
-    this.cartService.getCart(setCart);
+  ngOnInit() {
+    this.getCartProducts();
 
     $('#cart-slide-out').sidenav({
       edge: 'right',
       menuWidth: '30vw'
     });
+  }
+
+  getCartProducts() {
+    this.products = [];
+    this._cartService.getCartItems();
   }
 }

@@ -54,9 +54,10 @@ main {
 
   .img-wrapper {
     overflow: hidden;
-    height: 40vh;
+    height: 25vh;
     display: flex;
     align-items: center;
+    justify-content: center;
 
 
     img:not([src]) {
@@ -65,9 +66,9 @@ main {
 
     img {
       transition: transform .3s ease;
-      height: auto;
-      min-width: 100%;
+      // min-width: 100%;
       min-height: 100%;
+      max-height: 100%;
     }
   }
 
@@ -110,8 +111,6 @@ main {
 
 
 #email-signup {
-  margin: 0 -10%;
-  padding: 0 10%;
   height: 150px;
   border: 1px solid #ccc;
   text-align: center;

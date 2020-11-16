@@ -16,7 +16,7 @@ declare var $: any;
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  providers: [CategoryService, PromotionService, CartService]
+  providers: [CategoryService, PromotionService]
 })
 export class NavbarComponent implements OnInit {
   categories: Category[];
@@ -28,7 +28,6 @@ export class NavbarComponent implements OnInit {
     private promotionService: PromotionService,
     private storeService: StoreAuthService,
     private ahoy: AhoyService,
-    private cartService: CartService,
     private router: Router
   ) { }
 

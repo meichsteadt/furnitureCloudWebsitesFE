@@ -26,15 +26,17 @@ export class AppComponent {
   prevUrl: string;
   edit: boolean = false;
   urlParams = {};
+  storeService: StoreAuthService;
 
   constructor(private editService: EditService,
-              private storeService: StoreAuthService,
+              private _storeService: StoreAuthService,
               private titleService: Title,
               private ahoy: AhoyService,
               private router: Router,
               private activeRoute: ActivatedRoute,
               private authGuardService: AuthGuardService,
               private auth: AuthService) {
+    this.storeService = _storeService;
     let hostUrl = window.location.hostname;
     // let hostUrl = "royalfurniturefresno.com"
 

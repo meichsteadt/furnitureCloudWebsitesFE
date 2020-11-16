@@ -32,7 +32,6 @@ export class LandingPageComponent implements OnInit {
     $('#edit-category').sidenav('open');
     this.modelType = "Category";
     this.model = category;
-    console.log(category)
   }
 
   showPromotions() {

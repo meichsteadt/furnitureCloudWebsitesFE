@@ -13,12 +13,12 @@
   </div>
   <div class="categories center-align">
     <h4>Shop by Category</h4>
-    <!-- <div class="col s12 m6 l3 category-link" *ngFor="let category of categories"> -->
+    <!-- <div class="col s12 m6 l6 category-link" *ngFor="let category of categories"> -->
     <div class="col s12 m6 l3 box promo" *ngFor="let category of categories">
       <span *ngIf="edit" class="edit" (click)="editCategory(category)"><i class="material-icons">edit</i></span>
       <a routerLink="/categories/{{category.linkName()}}">
         <div class="img-wrapper">
-          <img src="{{category.image}}">
+          <img src="{{category.image}}" >
         </div>
         <div class="info">
           <h5>{{category.name}}</h5>
@@ -49,4 +49,3 @@
     </a>
   </div> -->
 </div>
-<app-email-signup id="email-signup"></app-email-signup>

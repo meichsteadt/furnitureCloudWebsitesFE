@@ -4,6 +4,7 @@ import { ProductService } from '../product.service';
 import { Product } from '../product.model';
 import { ProductItem } from '../product-item.model';
 import { AhoyService} from '../ahoy.service';
+import { CartService} from '../cart.service';
 import { showPrices } from '../secrets';
 
 declare var $: any;
@@ -21,7 +22,13 @@ export class ProductDetailsComponent implements OnInit {
   relatedProducts: Product[] = [];
   isLoaded: Boolean = false;
   promo: Boolean = false;
-  constructor(private productService: ProductService, private route: ActivatedRoute, private ahoy: AhoyService) { }
+
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute,
+    private ahoy: AhoyService,
+    private cartService: CartService
+    ) { }
 
   ngOnInit() {
     this.route.params.subscribe((urlParameters) => {
@@ -89,7 +96,7 @@ export class ProductDetailsComponent implements OnInit {
         });
       })
       $('#cart-slide-out').sidenav('close');
-      
+
     }, error => {console.log("error")}, () => (console.log("done")))
   }
 
@@ -97,4 +104,10 @@ export class ProductDetailsComponent implements OnInit {
     return this.showPrices
   }
 
+  addToCart() {
+    var hideButton = (res) => {
+      $("#addToCart").html('<p>Product successfully added to cart</p>')
+    }
+    this.cartService.addToCart(this.productId, hideButton);
+  }
 }
