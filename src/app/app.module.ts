@@ -54,6 +54,7 @@ import { PopularProductsComponent } from './popular-products/popular-products.co
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart-item/cart-item.component';
 import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
+import { CartCheckoutComponent } from './cart-checkout/cart-checkout.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { AddToCartComponent } from './add-to-cart/add-to-cart.component';
     PopularProductsComponent,
     CartComponent,
     CartItemComponent,
-    AddToCartComponent
+    AddToCartComponent,
+    CartCheckoutComponent
   ],
   imports: [
     routing,

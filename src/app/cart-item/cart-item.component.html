@@ -7,3 +7,16 @@
 <div class="col s4">
   <p>{{product.price | currency}}</p>
 </div>
+
+<!-- Modal that displays edit number of products/delete product from cart -->
+<div class="edit-modal">
+  <div class="input-field col s12">
+    <select (change)="updateQuantity($event.target.value)">
+      <option *ngFor="let i of quantityArray" value="{{i}}" [selected]="i == product.quantityInCart">{{i}}</option>
+    </select>
+  </div>
+
+  <a (click)="removeFromCart()" class="btn waves-effect waves-light red">Remove
+    <i class="material-icons left">delete</i>
+  </a>
+</div>

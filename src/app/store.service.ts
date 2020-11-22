@@ -16,7 +16,9 @@ import { StoreAuthService } from './store-auth.service';
 
 declare var $: any;
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class StoreService {
   store = this.storeService.store;
   url: string;

@@ -11,7 +11,9 @@ import { StoreAuthService } from './store-auth.service';
 
 declare var $: any;
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class CategoryService {
   url: string;
   headers = new HttpHeaders({

@@ -104,10 +104,10 @@ export class ProductDetailsComponent implements OnInit {
     return this.showPrices
   }
 
-  addToCart() {
+  addToCart(quantity:number = 3) {
     var hideButton = (res) => {
       $("#addToCart").html('<p>Product successfully added to cart</p>')
     }
-    this.cartService.addToCart(this.productId, hideButton);
+    this.cartService.addToCart(this.productId, quantity, hideButton);
   }
 }

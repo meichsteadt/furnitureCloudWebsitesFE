@@ -6,7 +6,9 @@ import { StoreAuthService } from './store-auth.service';
 import { url } from './secrets';
 declare var ahoy;
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AhoyService {
   url: string;
   visitId: string;

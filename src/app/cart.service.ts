@@ -12,7 +12,9 @@ import { url } from './secrets';
 declare var $: any;
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 
 export class CartService {
   url: string;
@@ -48,8 +50,6 @@ export class CartService {
       }
       else {
         this.getInitial().then(res => {
-          console.log(res);
-
           this.cart = new Cart(
             res["id"],
             this.ahoy.visitId,
@@ -68,8 +68,7 @@ export class CartService {
     }
 
     return asyncFunc().then(cart => {
-      console.log("in async");
-      let extension = "/" + this.cart.id + "/products"
+      let extension = "/" + this.cart.id + "/products";
       var newProducts = [];
       this.get(extension).subscribe(products => {
         for(var i = 0; i < products["arr"].length; i++) {
@@ -79,15 +78,54 @@ export class CartService {
             new Product(product["id"], product["name"], product["images"], product["description"], product["thumbnail"], price, product["set_name"], null, null, null)
           );
         }
-        console.log(newProducts);
         this.cartSource.next(newProducts);
       }, err=> {console.log(err)}
       );
     });
   }
 
-  addToCart(productId, callback = null) {
-    return this.post("/" + this.cart.id + "/cart_items", {cart_item: {product_id: productId}}).subscribe(
+  getCartItemQuantities(callback = null) {
+    var asyncFunc = async () => {
+      const result = await this.getCart();
+      return result;
+    }
+
+    return asyncFunc().then(cart => {
+      let extension = "/" + this.cart.id + "/cart_items?cart_item_only=true";
+      var quantities = [];
+      this.get(extension).subscribe((cartItems: Array<Object>) => {
+        for(var i = 0; i < cartItems.length; i++) {
+          quantities.push(cartItems[i]['quantity']);
+        }
+        this.cartSource.subscribe(prods => {
+          for (let i = 0; i < prods.length; i++) {
+            const prod = prods[i];
+            prod['quantityInCart'] = quantities[i];
+          }
+        })
+      }, err=> {console.log(err)}
+      );
+    });
+  }
+
+  addToCart(productId, quantity = 1, callback = null) {
+    return this.post("/" + this.cart.id + "/cart_items", {cart_item: {product_id: productId, quantity: quantity}}).subscribe(
+      res => this.cartSuccess(res),
+      err => this.cartError(err),
+      () => {if(callback){ callback()}},
+    );
+  }
+
+  removeFromCart(productId, callback = null) {
+    return this.destroy("/" + this.cart.id + "/cart_items/1?product_id=" + productId).subscribe(
+      res => this.cartSuccess(res),
+      err => this.cartError(err),
+      () => {if(callback){ callback()}},
+    );
+  }
+
+  updateQuantity(productId, quantity, callback = null) {
+    this.put("/" + this.cart.id + "/cart_items/1?product_id=" + productId, {cart_item: {quantity: quantity}}).subscribe(
       res => this.cartSuccess(res),
       err => this.cartError(err),
       () => {if(callback){ callback()}},
@@ -95,12 +133,12 @@ export class CartService {
   }
 
   cartSuccess(res) {
-    console.log("success");
     this.getCartItems();
+    this.getCartItemQuantities();
   }
 
   cartError(err) {
-    console.log(err);
+    console.log("error", err);
   }
 
   getInitial() {
@@ -121,5 +159,13 @@ export class CartService {
 
   post(extension = "", post_data) {
     return this.http.post(this.url + extension, post_data, {headers: this.headers})
+  }
+
+  put(extension = "", post_data) {
+    return this.http.put(this.url + extension, post_data, {headers: this.headers})
+  }
+
+  destroy(extension = "") {
+    return this.http.delete(this.url + extension, {headers: this.headers})
   }
 }

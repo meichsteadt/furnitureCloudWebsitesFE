@@ -1,5 +1,8 @@
+@import '../../variables.scss';
+
 #cart-slide-out {
   width: 20vw;
+  min-width: 400px;
   background-color: #efefef;
   padding: 0 20px;
 
@@ -15,4 +18,13 @@
   padding: 20px;
   background-color: #fff;
   border-radius: 10px;
+}
+
+.cart-items {
+  margin-top: 25px;
+  min-height: 80vh;
+}
+
+a:hover {
+  background-color: rgba(0, 0, 0, 0) !important;
 }

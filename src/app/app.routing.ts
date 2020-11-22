@@ -17,6 +17,7 @@ import { FinancingComponent } from './financing/financing.component';
 import { SearchComponent } from './search/search.component';
 import { PromotionsComponent } from './promotions/promotions.component';
 import { SetTypesComponent } from './set-types/set-types.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 import { SetTypesProductsComponent } from './set-types-products/set-types-products.component';
 
 const appRoutes: Routes = [
@@ -76,6 +77,10 @@ const appRoutes: Routes = [
   {
     path: 'sales',
     component: PromotionsComponent
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent
   },
   {
     path: 'search/:query',
